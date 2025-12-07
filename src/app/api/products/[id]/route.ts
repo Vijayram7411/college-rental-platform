@@ -51,9 +51,18 @@ export async function PATCH(request: NextRequest, context: ProductRouteContext) 
     const body = await request.json();
     const parsed = updateProductSchema.parse(body);
 
+    const { categoryId, ...rest } = parsed;
+
     const product = await prisma.product.update({
       where: { id },
-      data: parsed,
+      data: {
+        ...rest,
+        ...(categoryId && {
+          category: {
+            connect: { id: categoryId },
+          },
+        }),
+      },
     });
 
     return NextResponse.json(product);
