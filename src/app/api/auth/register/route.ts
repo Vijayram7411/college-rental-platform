@@ -20,6 +20,38 @@ export async function POST(request: Request) {
       );
     }
 
+    // Extract college domain from email
+    const emailDomain = parsed.email.split("@")[1]?.toLowerCase();
+    
+    if (!emailDomain) {
+      return NextResponse.json(
+        { error: "Invalid email format" },
+        { status: 400 },
+      );
+    }
+
+    // Find or create college based on email domain
+    let college = await prisma.college.findUnique({
+      where: { domain: emailDomain },
+    });
+
+    if (!college) {
+      // Auto-create college from domain
+      const collegeName = emailDomain
+        .split(".")[0]
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+
+      college = await prisma.college.create({
+        data: {
+          name: collegeName,
+          domain: emailDomain,
+          isActive: true,
+        },
+      });
+    }
+
     const passwordHash = await hash(parsed.password, 10);
 
     const user = await prisma.user.create({
@@ -27,6 +59,7 @@ export async function POST(request: Request) {
         name: parsed.name,
         email: parsed.email,
         passwordHash,
+        collegeId: college.id,
       },
     });
 

@@ -68,7 +68,7 @@ export default async function OwnerOrdersPage() {
                 <ul className="mt-2 space-y-1">
                   {order.items.map((item: any) => (
                     <li key={item.id} className="text-xs text-zinc-700">
-                      {item.product.title} · {item.quantity} pcs · {item.durationMonths} months
+                      {item.product.title} · {item.quantity} pcs · {item.durationMonths} days
                     </li>
                   ))}
                 </ul>

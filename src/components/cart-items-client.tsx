@@ -65,7 +65,7 @@ export function CartItemsClient({ items: initialItems }: { items: CartItemWithPr
                 <span className="font-semibold text-[#212121]">₹{item.pricePerMonth}</span>
                 <span>/month</span>
                 <span>•</span>
-                <span>{item.durationMonths} months</span>
+                <span>{item.durationMonths} days</span>
                 <span>•</span>
                 <span>Qty: {item.quantity}</span>
               </div>

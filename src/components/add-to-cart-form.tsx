@@ -54,7 +54,7 @@ export function AddToCartForm({ productId }: { productId: string }) {
         </div>
         <div className="flex-1 space-y-2">
           <label className="block text-sm font-semibold text-[#212121]">
-            Duration (months)
+            Duration (days)
           </label>
           <input
             type="number"

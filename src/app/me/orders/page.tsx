@@ -55,7 +55,7 @@ export default async function OrdersPage() {
                 <ul className="mt-2 space-y-1">
                   {order.items.map((item: (typeof order.items)[number]) => (
                     <li key={item.id} className="text-xs text-zinc-700">
-                      {item.product.title} · {item.quantity} pcs · {item.durationMonths} months
+                      {item.product.title} · {item.quantity} pcs · {item.durationMonths} days
                     </li>
                   ))}
                 </ul>

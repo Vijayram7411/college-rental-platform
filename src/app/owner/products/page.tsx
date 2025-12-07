@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { ProductCard } from "@/components/product-card";
 
 export default async function OwnerProductsPage() {
   try {
@@ -29,33 +30,37 @@ export default async function OwnerProductsPage() {
 
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-semibold text-zinc-900">Your products</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-[#212121]">Your Products</h1>
+          <a
+            href="/owner/products/add"
+            className="rounded-sm bg-[#ff9f00] px-6 py-2 text-sm font-bold text-white shadow-md hover:bg-[#e68a00]"
+          >
+            + ADD PRODUCT
+          </a>
+        </div>
         {products.length === 0 ? (
-          <p className="text-sm text-zinc-600">
-            You haven&apos;t listed any products yet. Use the admin tools or API to
-            create products.
-          </p>
+          <div className="flipkart-shadow rounded-sm bg-white p-8 text-center">
+            <div className="mb-4 text-6xl">📦</div>
+            <h3 className="mb-2 text-lg font-semibold text-[#212121]">
+              No products yet
+            </h3>
+            <p className="mb-4 text-sm text-gray-600">
+              Start listing your items for rent and earn money!
+            </p>
+            <a
+              href="/owner/products/add"
+              className="inline-block rounded-sm bg-[#2874f0] px-6 py-2 text-sm font-semibold text-white hover:bg-[#1c5bbf]"
+            >
+              Add Your First Product
+            </a>
+          </div>
         ) : (
-          <ul className="space-y-2 text-sm">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p: any) => (
-              <li
-                key={p.id}
-                className="flex flex-col gap-1 rounded-lg border border-zinc-200 bg-white p-3 sm:flex-row sm:items-center sm:justify-between"
-              >
-                <div>
-                  <p className="font-medium text-zinc-900">{p.title}</p>
-                  <p className="text-xs text-zinc-600">
-                    {p.category?.name ?? "Uncategorized"} · ₹{p.basePricePerMonth} / month
-                  </p>
-                  {!p.isActive && (
-                    <p className="mt-1 inline-flex rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-700">
-                      Inactive
-                    </p>
-                  )}
-                </div>
-              </li>
+              <ProductCard key={p.id} product={p} />
             ))}
-          </ul>
+          </div>
         )}
       </div>
     );

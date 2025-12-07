@@ -10,6 +10,22 @@ datasource db {
 
 // SQLite doesn't support enums, using String instead
 
+model College {
+  id          String   @id @default(cuid())
+  name        String
+  domain      String   @unique
+  isActive    Boolean  @default(true)
+
+  users       User[]
+  products    Product[]
+  orders      RentalOrder[]
+  carts       Cart[]
+  ownerApplications OwnerProfile[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model User {
   id            String           @id @default(cuid())
   name          String?
@@ -19,6 +35,9 @@ model User {
   role          String           @default("USER")
 
   passwordHash  String?
+
+  college       College?         @relation(fields: [collegeId], references: [id])
+  collegeId     String?
 
   ownerProfile  OwnerProfile?
   products      Product[]        @relation("OwnerProducts")
@@ -44,6 +63,9 @@ model OwnerProfile {
   phone       String?
   collegeName String?
   documentUrl String?
+
+  college     College?    @relation(fields: [collegeId], references: [id])
+  collegeId   String?
 
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
@@ -77,6 +99,9 @@ model Product {
   category     Category @relation(fields: [categoryId], references: [id])
   categoryId   String
 
+  college      College? @relation(fields: [collegeId], references: [id])
+  collegeId    String?
+
   cartItems    CartItem[]
   orderItems   RentalOrderItem[]
   reviews      Review[]
@@ -90,6 +115,9 @@ model Cart {
   user      User        @relation(fields: [userId], references: [id])
   userId    String      @unique
   items     CartItem[]
+
+  college   College?    @relation(fields: [collegeId], references: [id])
+  collegeId String?
 
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
@@ -122,6 +150,9 @@ model RentalOrder {
   totalAmount     Int
   startDate       DateTime?
   endDate         DateTime?
+
+  college         College?         @relation(fields: [collegeId], references: [id])
+  collegeId       String?
 
   items           RentalOrderItem[]
   shipping        Address?         @relation(fields: [shippingAddressId], references: [id])
