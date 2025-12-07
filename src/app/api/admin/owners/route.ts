@@ -53,9 +53,9 @@ export async function POST(request: Request) {
         adminId: admin.id,
         targetUserId: profile.userId,
         type: parsed.action === "APPROVE" ? "OWNER_APPROVED" : "OWNER_REJECTED",
-        metadata: {
+        metadata: JSON.stringify({
           ownerProfileId: profile.id,
-        },
+        }),
       },
     });
 
