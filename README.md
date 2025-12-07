@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # College Rental Platform
 
 A modern rental platform for college students built with Next.js 16, featuring a Flipkart-inspired UI design and college-based data isolation.
@@ -408,3 +409,6 @@ This project is open source and available under the MIT License.
 ---
 
 Built with ❤️ for college students | Tested with ✅ 25/25 passing tests
+=======
+# college-rental-platform
+>>>>>>> 55d87f70080b8779352de813a3d4004b54145b44
