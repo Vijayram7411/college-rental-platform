@@ -32,7 +32,7 @@ export async function POST(request: Request) {
         title: parsed.title,
         description: parsed.description,
         thumbnailUrl: parsed.thumbnailUrl,
-        images: parsed.images,
+        images: JSON.stringify(parsed.images),
         basePricePerMonth: parsed.basePricePerMonth,
         originalPricePerMonth: parsed.originalPricePerMonth,
         isActive: parsed.isActive ?? true,
