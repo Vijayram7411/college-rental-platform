@@ -61,7 +61,7 @@ export default function OwnerApplyPage() {
         setForm(prev => ({ ...prev, idCardBack: base64 }));
         setBackPreview(base64);
       }
-    } catch (err) {
+    } catch (_err) {
       setError(`Failed to process ${side} image`);
     } finally {
       setUploading(false);
