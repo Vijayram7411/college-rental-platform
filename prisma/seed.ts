@@ -1,4 +1,4 @@
-import { PrismaClient } from "../src/generated/prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 // The `@prisma/extension-accelerate` extension is optional. Some environments
 // where this project is built may not have the package installed which causes
