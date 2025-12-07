@@ -26,7 +26,7 @@ export async function requireRole(roles: Role | Role[]) {
   const allowedRoles = Array.isArray(roles) ? roles : [roles];
   const user = await requireUser();
 
-  if (!allowedRoles.includes(user.role)) {
+  if (!allowedRoles.includes(user.role as Role)) {
     throw new Error("Forbidden");
   }
 
