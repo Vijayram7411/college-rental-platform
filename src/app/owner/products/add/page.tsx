@@ -109,7 +109,7 @@ export default function AddProductPage() {
         try {
           const base64 = await convertToBase64(imageFiles[i]);
           base64Images.push(base64);
-        } catch (err) {
+        } catch (_err) {
           setError(`Failed to process image ${i + 1}. Please try again.`);
           setLoading(false);
           setUploading(false);

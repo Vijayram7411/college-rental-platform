@@ -23,7 +23,7 @@ export function CatalogProductCard({ product }: CatalogProductCardProps) {
   let images: string[] = [];
   try {
     images = product.images ? JSON.parse(product.images) : [];
-  } catch (e) {
+  } catch (_e) {
     console.error("Error parsing images for product", product.id);
   }
   const thumbnail = product.thumbnailUrl || images[0] || "";

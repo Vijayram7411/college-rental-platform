@@ -37,7 +37,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
   let images: string[] = [];
   try {
     images = product.images ? JSON.parse(product.images) : [];
-  } catch (e) {
+  } catch (_e) {
     console.error("Error parsing images for product", product.id);
   }
 
