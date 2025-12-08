@@ -30,7 +30,7 @@ export default async function Home() {
                 Browse Catalog
               </Link>
               <Link
-                href="/owner/apply"
+                href="/owner/products/add"
                 className="inline-flex items-center gap-2 rounded-sm bg-[#2874f0] px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#1c5bbf]"
               >
                 List Your Items
@@ -83,7 +83,7 @@ export default async function Home() {
             <p className="text-xs text-gray-600">Manage your products</p>
           </Link>
         ) : (
-          <Link href="/owner/apply" className="flipkart-shadow-hover group rounded-sm bg-gradient-to-br from-[#ffe500] to-[#ffd700] p-6 transition-all">
+          <Link href="/owner/products/add" className="flipkart-shadow-hover group rounded-sm bg-gradient-to-br from-[#ffe500] to-[#ffd700] p-6 transition-all">
             <div className="mb-3 text-3xl">⭐</div>
             <h3 className="mb-1 font-semibold text-[#212121]">Start Renting Out</h3>
             <p className="text-xs text-gray-800">Earn money from your items</p>
