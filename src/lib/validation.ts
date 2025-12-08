@@ -65,7 +65,9 @@ export const checkoutSchema = z.object({
 export const ownerApplicationSchema = z.object({
   phone: z.string().min(5).max(20),
   collegeName: z.string().min(1),
-  documentUrl: z.string().url(),
+  collegeEmail: z.string().email().optional(),
+  idCardFront: z.string().min(1),
+  idCardBack: z.string().min(1),
 });
 
 export const adminOwnerDecisionSchema = z.object({

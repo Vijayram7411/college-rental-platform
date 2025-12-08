@@ -21,19 +21,28 @@ export async function POST(request: Request) {
       );
     }
 
+    // Combine ID card images into a single document URL (stored as JSON string)
+    const documentData = {
+      idCardFront: parsed.idCardFront,
+      idCardBack: parsed.idCardBack,
+      collegeEmail: parsed.collegeEmail || null,
+    };
+    const documentUrl = JSON.stringify(documentData);
+
     const profile = await prisma.ownerProfile.upsert({
       where: { userId: user.id },
       create: {
         userId: user.id,
         phone: parsed.phone,
         collegeName: parsed.collegeName,
-        documentUrl: parsed.documentUrl,
+        documentUrl: documentUrl,
         status: "PENDING",
+        collegeId: user.collegeId,
       },
       update: {
         phone: parsed.phone,
         collegeName: parsed.collegeName,
-        documentUrl: parsed.documentUrl,
+        documentUrl: documentUrl,
         status: "PENDING",
       },
     });
