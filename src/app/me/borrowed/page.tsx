@@ -37,6 +37,7 @@ export default function BorrowedPage() {
   const [orders, setOrders] = useState<BorrowedItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [updatingOrderId, setUpdatingOrderId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchBorrowedItems();
@@ -85,6 +86,33 @@ export default function BorrowedPage() {
   const formatStatus = (status: string) => {
     return status.replace(/_/g, " ");
   };
+
+  async function handleCancelOrder(orderId: string) {
+    if (!confirm("Are you sure you want to cancel this order?")) {
+      return;
+    }
+
+    setUpdatingOrderId(orderId);
+    try {
+      const res = await fetch(`/api/orders/${orderId}/status`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "CANCELLED" }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to cancel order");
+      }
+
+      // Refresh orders
+      await fetchBorrowedItems();
+    } catch (err: any) {
+      alert(err.message || "Failed to cancel order");
+    } finally {
+      setUpdatingOrderId(null);
+    }
+  }
 
   if (loading) {
     return (
@@ -235,6 +263,19 @@ export default function BorrowedPage() {
                         {new Date(order.endDate).toLocaleDateString()}
                       </div>
                     </div>
+                  </div>
+                )}
+
+                {/* Action Buttons */}
+                {order.status !== "COMPLETED" && order.status !== "CANCELLED" && (
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <button
+                      onClick={() => handleCancelOrder(order.id)}
+                      disabled={updatingOrderId === order.id}
+                      className="rounded-sm bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60"
+                    >
+                      {updatingOrderId === order.id ? "Cancelling..." : "Cancel Order"}
+                    </button>
                   </div>
                 )}
               </div>
