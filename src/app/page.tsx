@@ -33,7 +33,7 @@ export default async function Home() {
                 href="/owner/apply"
                 className="inline-flex items-center gap-2 rounded-sm bg-[#2874f0] px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#1c5bbf]"
               >
-                Become a Seller
+                List Your Items
               </Link>
             </div>
             <div className="flex flex-wrap gap-6 text-sm">
@@ -85,8 +85,8 @@ export default async function Home() {
         ) : (
           <Link href="/owner/apply" className="flipkart-shadow-hover group rounded-sm bg-gradient-to-br from-[#ffe500] to-[#ffd700] p-6 transition-all">
             <div className="mb-3 text-3xl">⭐</div>
-            <h3 className="mb-1 font-semibold text-[#212121]">Start Selling</h3>
-            <p className="text-xs text-gray-800">Earn from your items</p>
+            <h3 className="mb-1 font-semibold text-[#212121]">Start Renting Out</h3>
+            <p className="text-xs text-gray-800">Earn money from your items</p>
           </Link>
         )}
       </div>
@@ -98,7 +98,7 @@ export default async function Home() {
             <div>
               <h2 className="mb-1 text-lg font-semibold text-[#212121]">New to College Rentals?</h2>
               <p className="text-sm text-gray-600">
-                Create an account to start renting or become a seller today
+                Create an account to start renting or list your items today
               </p>
             </div>
             <div className="flex gap-3">
