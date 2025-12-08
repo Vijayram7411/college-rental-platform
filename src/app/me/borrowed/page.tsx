@@ -38,6 +38,13 @@ export default function BorrowedPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [updatingOrderId, setUpdatingOrderId] = useState<string | null>(null);
+  const [reviewingProduct, setReviewingProduct] = useState<{
+    orderId: string;
+    productId: string;
+    productTitle: string;
+  } | null>(null);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewComment, setReviewComment] = useState("");
 
   useEffect(() => {
     fetchBorrowedItems();
@@ -111,6 +118,35 @@ export default function BorrowedPage() {
       alert(err.message || "Failed to cancel order");
     } finally {
       setUpdatingOrderId(null);
+    }
+  }
+
+  async function handleSubmitReview() {
+    if (!reviewingProduct) return;
+
+    try {
+      const res = await fetch(`/api/reviews/${reviewingProduct.orderId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId: reviewingProduct.productId,
+          rating: reviewRating,
+          comment: reviewComment,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to submit review");
+      }
+
+      alert("Review submitted successfully!");
+      setReviewingProduct(null);
+      setReviewRating(5);
+      setReviewComment("");
+      await fetchBorrowedItems();
+    } catch (err: any) {
+      alert(err.message || "Failed to submit review");
     }
   }
 
@@ -278,9 +314,106 @@ export default function BorrowedPage() {
                     </button>
                   </div>
                 )}
+
+                {/* Review Button for Completed Orders */}
+                {order.status === "COMPLETED" && (
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <p className="text-sm font-medium text-[#212121] mb-3">
+                      Rate your experience:
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {order.items.map((item) => (
+                        <button
+                          key={item.id}
+                          onClick={() =>
+                            setReviewingProduct({
+                              orderId: order.id,
+                              productId: item.product.id,
+                              productTitle: item.product.title,
+                            })
+                          }
+                          className="rounded-sm bg-[#ff9f00] px-4 py-2 text-sm font-semibold text-white hover:bg-[#e68a00]"
+                        >
+                          ⭐ Review {item.product.title}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Review Modal */}
+      {reviewingProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+          <div className="w-full max-w-md rounded-sm bg-white p-6 shadow-xl">
+            <h3 className="mb-4 text-lg font-bold text-[#212121]">
+              Review: {reviewingProduct.productTitle}
+            </h3>
+
+            {/* Star Rating */}
+            <div className="mb-4">
+              <label className="mb-2 block text-sm font-semibold text-[#212121]">
+                Rating
+              </label>
+              <div className="flex gap-2">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    type="button"
+                    onClick={() => setReviewRating(star)}
+                    className="text-3xl transition-all hover:scale-110"
+                  >
+                    {star <= reviewRating ? "⭐" : "☆"}
+                  </button>
+                ))}
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                {reviewRating === 1 && "Poor"}
+                {reviewRating === 2 && "Fair"}
+                {reviewRating === 3 && "Good"}
+                {reviewRating === 4 && "Very Good"}
+                {reviewRating === 5 && "Excellent"}
+              </p>
+            </div>
+
+            {/* Comment */}
+            <div className="mb-4">
+              <label className="mb-2 block text-sm font-semibold text-[#212121]">
+                Comment (optional)
+              </label>
+              <textarea
+                value={reviewComment}
+                onChange={(e) => setReviewComment(e.target.value)}
+                placeholder="Share your experience with this product..."
+                rows={4}
+                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+              />
+            </div>
+
+            {/* Buttons */}
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setReviewingProduct(null);
+                  setReviewRating(5);
+                  setReviewComment("");
+                }}
+                className="flex-1 rounded-sm border-2 border-gray-300 px-4 py-2 text-sm font-semibold text-[#212121] hover:border-[#2874f0]"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSubmitReview}
+                className="flex-1 rounded-sm bg-[#ff9f00] px-4 py-2 text-sm font-semibold text-white hover:bg-[#e68a00]"
+              >
+                Submit Review
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
