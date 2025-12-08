@@ -322,10 +322,25 @@ export default function AddProductPage() {
         <div className="space-y-3">
           <label className="block text-sm font-semibold text-[#212121]">
             Product Images <span className="text-red-600">*</span>
-            <span className="ml-2 text-xs font-normal text-gray-600">
-              (Minimum 3 images, Maximum 10 images, Max 5MB each)
-            </span>
           </label>
+          
+          {/* Image Requirement Notice */}
+          <div className="rounded-sm bg-red-50 border-2 border-red-200 p-3">
+            <div className="flex items-start gap-2">
+              <span className="text-red-600 text-lg">⚠️</span>
+              <div>
+                <p className="text-sm font-bold text-red-800">Minimum 3 Images Required</p>
+                <p className="text-xs text-red-700 mt-1">
+                  You must upload at least 3 product images. Maximum 10 images allowed (5MB each).
+                </p>
+                {imageFiles.length > 0 && (
+                  <p className="text-xs font-semibold text-red-800 mt-2">
+                    Current: {imageFiles.length} / 3 minimum {imageFiles.length >= 3 ? "✓" : ""}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
 
           {/* Image Upload Button */}
           <div className="rounded-sm border-2 border-dashed border-[#2874f0] p-6 text-center">
@@ -364,9 +379,12 @@ export default function AddProductPage() {
                   <p className="text-xs text-gray-600">
                     or drag and drop
                   </p>
+                  <p className="text-xs font-bold text-red-600 mt-2">
+                    Minimum 3 images required
+                  </p>
                 </div>
                 <p className="text-xs text-gray-500">
-                  PNG, JPG, WEBP up to 5MB
+                  PNG, JPG, WEBP up to 5MB each
                 </p>
               </div>
             </label>
