@@ -11,10 +11,23 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Only ADMIN and OWNER can add products
-    if (role !== "ADMIN" && role !== "OWNER") {
+    // Get user with owner profile
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+      include: { ownerProfile: true },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Check if user is admin OR has approved owner profile
+    const isAdmin = role === "ADMIN";
+    const hasApprovedProfile = user.ownerProfile?.status === "APPROVED";
+
+    if (!isAdmin && !hasApprovedProfile) {
       return NextResponse.json(
-        { error: "Only admins and owners can add products" },
+        { error: "You need an approved owner profile to add products" },
         { status: 403 }
       );
     }
@@ -65,16 +78,7 @@ export async function POST(request: Request) {
       });
     }
 
-    // Get user
-    const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
-
-    // Create product
+    // Create product (user already fetched above)
     const product = await prisma.product.create({
       data: {
         title,
