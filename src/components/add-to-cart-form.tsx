@@ -24,7 +24,7 @@ export function AddToCartForm({ productId }: { productId: string }) {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        setError(data.error ?? "Failed to add to cart");
+        setError(data.error ?? "Failed to add item");
         setLoading(false);
         return;
       }
@@ -71,8 +71,8 @@ export function AddToCartForm({ productId }: { productId: string }) {
         disabled={loading}
         className="flex w-full items-center justify-center gap-2 rounded-sm bg-[#ff9f00] px-4 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#e68a00] disabled:opacity-60"
       >
-        <span>🛒</span>
-        {loading ? "Adding to Cart..." : "ADD TO CART"}
+        <span>📦</span>
+        {loading ? "Processing..." : "BORROW"}
       </button>
     </form>
   );

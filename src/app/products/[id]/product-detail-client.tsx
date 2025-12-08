@@ -194,7 +194,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
             href="/cart"
             className="mt-3 block rounded-sm border-2 border-gray-300 px-4 py-2 text-center text-sm font-bold text-[#212121] hover:border-[#2874f0]"
           >
-            Go to cart
+            View Cart
           </Link>
         </div>
       </div>
