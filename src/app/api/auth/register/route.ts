@@ -67,6 +67,7 @@ export async function POST(request: Request) {
         email: parsed.email,
         passwordHash,
         collegeId: parsed.collegeId,
+        role: "OWNER", // Everyone can list items
       },
     });
 
