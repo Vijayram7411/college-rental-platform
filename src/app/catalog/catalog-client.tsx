@@ -10,6 +10,9 @@ interface Product {
   basePricePerMonth: number;
   originalPricePerMonth: number | null;
   thumbnailUrl: string;
+  images: string;
+  rating: number | null;
+  ratingCount: number | null;
   category: {
     id: string;
     name: string;
