@@ -244,7 +244,7 @@ export default function AddProductPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-[#212121]">
-              Rental Price (per month) <span className="text-red-600">*</span>
+              Rental Price (per day) <span className="text-red-600">*</span>
             </label>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600">

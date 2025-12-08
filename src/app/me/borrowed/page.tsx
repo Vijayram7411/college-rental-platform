@@ -212,10 +212,10 @@ export default function BorrowedPage() {
                             Quantity: {item.quantity}
                           </span>
                           <span className="text-sm text-gray-600">
-                            Duration: {item.durationMonths} month{item.durationMonths > 1 ? "s" : ""}
+                            Duration: {item.durationMonths} day{item.durationMonths > 1 ? "s" : ""}
                           </span>
                           <span className="text-sm font-medium text-[#212121]">
-                            ₹{item.pricePerMonth}/month
+                            ₹{item.pricePerMonth}/day
                           </span>
                         </div>
                       </div>

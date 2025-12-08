@@ -63,7 +63,7 @@ export function CartItemsClient({ items: initialItems }: { items: CartItemWithPr
               <p className="mb-1 text-base font-semibold text-[#212121]">{item.product.title}</p>
               <div className="mb-2 flex flex-wrap items-center gap-2 text-sm text-gray-600">
                 <span className="font-semibold text-[#212121]">₹{item.pricePerMonth}</span>
-                <span>/month</span>
+                <span>/day</span>
                 <span>•</span>
                 <span>{item.durationMonths} days</span>
                 <span>•</span>
@@ -86,7 +86,7 @@ export function CartItemsClient({ items: initialItems }: { items: CartItemWithPr
                 />
               </label>
               <label className="flex items-center gap-2 text-sm text-gray-700">
-                <span className="font-medium">Months</span>
+                <span className="font-medium">Days</span>
                 <input
                   type="number"
                   min={1}

@@ -116,7 +116,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
               <span className="text-2xl font-bold text-[#212121]">
                 ₹{product.basePricePerMonth}
               </span>
-              <span className="text-gray-600">/month</span>
+              <span className="text-gray-600">/day</span>
             </div>
             {product.originalPricePerMonth &&
               product.originalPricePerMonth > product.basePricePerMonth && (
