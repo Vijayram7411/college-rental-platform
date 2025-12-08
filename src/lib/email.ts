@@ -1,9 +1,4 @@
-// Simple email notification service
-// For production, you can use services like:
-// - Resend (recommended, free tier available)
-// - SendGrid
-// - AWS SES
-// - Nodemailer with Gmail
+import { Resend } from 'resend';
 
 interface EmailOptions {
   to: string;
@@ -11,26 +6,37 @@ interface EmailOptions {
   html: string;
 }
 
+// Initialize Resend with API key
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+
 export async function sendEmail({ to, subject, html }: EmailOptions) {
-  // For now, we'll log to console
-  // In production, integrate with an email service
-  
-  console.log("📧 Email Notification:");
-  console.log("To:", to);
-  console.log("Subject:", subject);
-  console.log("Body:", html);
-  
-  // TODO: Integrate with email service
-  // Example with Resend:
-  // const resend = new Resend(process.env.RESEND_API_KEY);
-  // await resend.emails.send({
-  //   from: 'College Rentals <noreply@yourdomain.com>',
-  //   to,
-  //   subject,
-  //   html,
-  // });
-  
-  return { success: true };
+  // If Resend is not configured, log to console
+  if (!resend || !process.env.RESEND_API_KEY) {
+    console.log("⚠️ RESEND_API_KEY not configured. Email would be sent to:", to);
+    console.log("📧 Subject:", subject);
+    console.log("💡 To enable emails, add RESEND_API_KEY to your .env file");
+    return { success: false, error: "Email service not configured" };
+  }
+
+  try {
+    const { data, error } = await resend.emails.send({
+      from: 'College Rentals <onboarding@resend.dev>', // Use resend.dev domain for testing
+      to,
+      subject,
+      html,
+    });
+
+    if (error) {
+      console.error('❌ Email send error:', error);
+      return { success: false, error };
+    }
+
+    console.log('✅ Email sent successfully to:', to);
+    return { success: true, data };
+  } catch (error) {
+    console.error('❌ Email send failed:', error);
+    return { success: false, error };
+  }
 }
 
 export function generateNewOrderEmail({
