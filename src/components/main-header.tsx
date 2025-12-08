@@ -41,7 +41,7 @@ export function MainHeader() {
           <nav className="hidden items-center gap-1 lg:flex">
             <NavLink href="/catalog" label="Catalog" />
             <NavLink href="/cart" label="Cart" />
-            <NavLink href="/me/orders" label="Orders" />
+            {session && <NavLink href="/me/borrowed" label="Borrowed" />}
             {session && <NavLink href="/me/profile" label="Profile" />}
             {(role === "OWNER" || role === "ADMIN") && (
               <>
