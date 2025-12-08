@@ -49,12 +49,16 @@ npm install cloudinary next-cloudinary
 
 ### 5. Implementation Files
 
-I've prepared the implementation files. To activate:
+**Note**: The Cloudinary utility file was removed to fix the Vercel build (since the package isn't installed yet).
 
-1. **Upload Utility** (`src/lib/cloudinary.ts`) - Already created
-2. **Updated Add Product Page** - Uses Cloudinary upload
-3. **Updated Edit Product Page** - Uses Cloudinary upload
-4. **Image Component** - Optimized display with Next.js Image
+When you're ready to implement Cloudinary:
+
+1. Install the package: `npm install cloudinary next-cloudinary`
+2. Create `src/lib/cloudinary.ts` with upload/delete utilities
+3. Update Add/Edit Product pages to use Cloudinary
+4. Update image display components
+
+I can help you implement this once you have your Cloudinary account set up!
 
 ### 6. Migration Script
 
