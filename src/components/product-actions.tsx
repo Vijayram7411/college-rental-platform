@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface ProductActionsProps {
   productId: string;
@@ -45,16 +46,16 @@ export function ProductActions({ productId, productTitle, showEditButton = true 
     <>
       {showEditButton ? (
         <div className="mt-2 flex gap-2">
-          <a
+          <Link
             href={`/owner/products/${productId}/edit`}
             className="flex-1 rounded-sm bg-[#2874f0] px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#1c5bbf]"
           >
             ✏️ Edit
-          </a>
+          </Link>
           <button
             onClick={() => setShowConfirm(true)}
             disabled={deleting}
-            className="flex-1 rounded-sm bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60"
+            className="flex-1 rounded-sm bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#1c5bbf]"
           >
             🗑️ Delete
           </button>

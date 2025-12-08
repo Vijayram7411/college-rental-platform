@@ -6,8 +6,9 @@ import { OwnerProductDetailClient } from "./owner-product-detail-client";
 export default async function OwnerProductDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
   try {
     const session = await auth();
     const role = (session?.user as any)?.role as string | undefined;
@@ -29,7 +30,7 @@ export default async function OwnerProductDetailPage({
     }
 
     const product = await prisma.product.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         category: true,
         owner: {

@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
@@ -33,12 +34,12 @@ export default async function OwnerProductsPage() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-[#212121]">Your Products</h1>
-          <a
+          <Link
             href="/owner/products/add"
             className="rounded-sm bg-[#ff9f00] px-6 py-2 text-sm font-bold text-white shadow-md hover:bg-[#e68a00]"
           >
             + ADD PRODUCT
-          </a>
+          </Link>
         </div>
         {products.length === 0 ? (
           <div className="flipkart-shadow rounded-sm bg-white p-8 text-center">
@@ -49,12 +50,12 @@ export default async function OwnerProductsPage() {
             <p className="mb-4 text-sm text-gray-600">
               Start listing your items for rent and earn money!
             </p>
-            <a
+            <Link
               href="/owner/products/add"
               className="inline-block rounded-sm bg-[#2874f0] px-6 py-2 text-sm font-semibold text-white hover:bg-[#1c5bbf]"
             >
               Add Your First Product
-            </a>
+            </Link>
           </div>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -62,18 +63,18 @@ export default async function OwnerProductsPage() {
               <div key={p.id} className="relative">
                 <ProductCard product={p} />
                 <div className="mt-2 flex gap-2">
-                  <a
+                  <Link
                     href={`/owner/products/${p.id}`}
                     className="flex-1 rounded-sm bg-[#388e3c] px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#2d6e2d]"
                   >
                     👁️ View
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href={`/owner/products/${p.id}/edit`}
                     className="flex-1 rounded-sm bg-[#2874f0] px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#1c5bbf]"
                   >
                     ✏️ Edit
-                  </a>
+                  </Link>
                 </div>
                 <ProductActions productId={p.id} productTitle={p.title} showEditButton={false} />
               </div>
