@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import type { DefaultSession } from "next-auth";
 
@@ -46,11 +46,68 @@ function MobileNavLink({ href, label, onClick }: { href: string; label: string; 
 
 export function MainHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showShortcuts, setShowShortcuts] = useState(false);
   const { data: session, status } = useSession();
+  const router = useRouter();
   const user = session?.user as (DefaultSession["user"] & { role?: string }) | undefined;
   const role = user?.role;
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      // Only trigger if not typing in an input
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      ) {
+        return;
+      }
+
+      // Show shortcuts help with ?
+      if (e.key === "?" && e.shiftKey) {
+        e.preventDefault();
+        setShowShortcuts(true);
+        return;
+      }
+
+      // Close shortcuts modal with Escape
+      if (e.key === "Escape") {
+        setShowShortcuts(false);
+        setMobileMenuOpen(false);
+        return;
+      }
+
+      // Navigation shortcuts (Alt + key)
+      if (e.altKey) {
+        e.preventDefault();
+        switch (e.key.toLowerCase()) {
+          case "c":
+            router.push("/catalog");
+            break;
+          case "k":
+            router.push("/cart");
+            break;
+          case "b":
+            if (session) router.push("/me/borrowed");
+            break;
+          case "p":
+            if (session) router.push("/me/profile");
+            break;
+          case "m":
+            if (role === "OWNER" || role === "ADMIN") router.push("/owner/products");
+            break;
+          case "h":
+            router.push("/");
+            break;
+        }
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [router, session, role]);
 
   return (
     <header className="sticky top-0 z-30 bg-[#2874f0] shadow-md">
@@ -197,6 +254,67 @@ export function MainHeader() {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Keyboard Shortcuts Help Modal */}
+      {showShortcuts && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+          <div className="w-full max-w-md rounded-sm bg-white p-6 shadow-xl">
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-lg font-bold text-[#212121]">
+                ⌨️ Keyboard Shortcuts
+              </h3>
+              <button
+                onClick={() => setShowShortcuts(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="space-y-3 text-sm">
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Show this help</span>
+                <kbd className="rounded bg-gray-100 px-2 py-1 font-mono text-xs">Shift + ?</kbd>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Go to Catalog</span>
+                <kbd className="rounded bg-gray-100 px-2 py-1 font-mono text-xs">Alt + C</kbd>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Go to Cart</span>
+                <kbd className="rounded bg-gray-100 px-2 py-1 font-mono text-xs">Alt + K</kbd>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Go to Borrowed</span>
+                <kbd className="rounded bg-gray-100 px-2 py-1 font-mono text-xs">Alt + B</kbd>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Go to Profile</span>
+                <kbd className="rounded bg-gray-100 px-2 py-1 font-mono text-xs">Alt + P</kbd>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Go to My Products</span>
+                <kbd className="rounded bg-gray-100 px-2 py-1 font-mono text-xs">Alt + M</kbd>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Go to Home</span>
+                <kbd className="rounded bg-gray-100 px-2 py-1 font-mono text-xs">Alt + H</kbd>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-700">Close modal/menu</span>
+                <kbd className="rounded bg-gray-100 px-2 py-1 font-mono text-xs">Esc</kbd>
+              </div>
+            </div>
+
+            <div className="mt-6 rounded-sm bg-blue-50 p-3 text-xs text-gray-700">
+              <p className="font-semibold mb-1">💡 Tip:</p>
+              <p>Press <kbd className="rounded bg-white px-1 py-0.5 font-mono">Shift + ?</kbd> anytime to see these shortcuts!</p>
+            </div>
           </div>
         </div>
       )}
