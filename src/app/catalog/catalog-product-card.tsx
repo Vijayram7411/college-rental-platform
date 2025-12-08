@@ -63,7 +63,7 @@ export function CatalogProductCard({ product }: CatalogProductCardProps) {
           <span className="text-lg font-bold text-[#212121]">
             ₹{product.basePricePerMonth}
           </span>
-          <span className="text-xs text-gray-600">/month</span>
+          <span className="text-xs text-gray-600">/day</span>
         </div>
         {product.rating !== null &&
           product.ratingCount !== null &&
