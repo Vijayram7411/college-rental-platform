@@ -42,6 +42,7 @@ export function MainHeader() {
             <NavLink href="/catalog" label="Catalog" />
             <NavLink href="/cart" label="Cart" />
             <NavLink href="/me/orders" label="Orders" />
+            {session && <NavLink href="/me/profile" label="Profile" />}
             {(role === "OWNER" || role === "ADMIN") && (
               <>
                 <NavLink href="/owner/products" label="My Products" />
