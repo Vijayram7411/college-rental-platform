@@ -58,7 +58,17 @@ export default async function OwnerProductsPage() {
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p: any) => (
-              <ProductCard key={p.id} product={p} />
+              <div key={p.id} className="relative">
+                <ProductCard product={p} />
+                <div className="mt-2 flex gap-2">
+                  <a
+                    href={`/owner/products/${p.id}/edit`}
+                    className="flex-1 rounded-sm bg-[#2874f0] px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#1c5bbf]"
+                  >
+                    ✏️ Edit
+                  </a>
+                </div>
+              </div>
             ))}
           </div>
         )}
