@@ -94,6 +94,14 @@ export default function AddProductPage() {
     setUploading(true);
     setError(null);
 
+    // Validate category
+    if (!form.categorySlug) {
+      setError("Please select a category");
+      setLoading(false);
+      setUploading(false);
+      return;
+    }
+
     // Validate images
     if (imageFiles.length < 3) {
       setError("Please upload at least 3 product images");
@@ -429,8 +437,8 @@ export default function AddProductPage() {
         <div className="flex gap-3">
           <button
             type="submit"
-            disabled={loading || imageFiles.length < 3}
-            className="flex-1 rounded-sm bg-[#ff9f00] px-6 py-3 text-sm font-bold text-white shadow-md hover:bg-[#e68a00] disabled:opacity-60"
+            disabled={loading || imageFiles.length < 3 || !form.categorySlug}
+            className="flex-1 rounded-sm bg-[#ff9f00] px-6 py-3 text-sm font-bold text-white shadow-md hover:bg-[#e68a00] disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {uploading
               ? "Processing Images..."
@@ -445,6 +453,17 @@ export default function AddProductPage() {
             Cancel
           </Link>
         </div>
+        
+        {/* Validation Helper */}
+        {(imageFiles.length < 3 || !form.categorySlug) && (
+          <div className="rounded-sm bg-yellow-50 p-3 text-xs text-yellow-800">
+            <p className="font-semibold mb-1">Before submitting, please ensure:</p>
+            <ul className="ml-4 list-disc space-y-1">
+              {!form.categorySlug && <li>Select a category</li>}
+              {imageFiles.length < 3 && <li>Upload at least 3 product images (currently: {imageFiles.length})</li>}
+            </ul>
+          </div>
+        )}
 
         {/* Upload Progress */}
         {uploading && (
