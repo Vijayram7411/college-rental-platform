@@ -1,9 +1,23 @@
 import Link from "next/link";
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session = await auth();
   const role = (session?.user as any)?.role as string | undefined;
+  
+  // Only redirect to role selection if user hasn't chosen a role yet
+  if (session && role === "USER") {
+    redirect("/select-role");
+  }
+  
+  // If user has a role (BORROWER/LENDER), redirect to appropriate page
+  if (session && role === "LENDER") {
+    redirect("/owner/products");
+  }
+  if (session && role === "BORROWER") {
+    redirect("/catalog");
+  }
 
   return (
     <div className="flex flex-1 flex-col gap-4">

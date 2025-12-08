@@ -59,6 +59,8 @@ export async function POST(request: Request) {
       idCardBack: parsed.idCardBack,
       collegeEmail: parsed.collegeEmail || null,
       phone: parsed.phone,
+      aadhaarNumber: parsed.aadhaarNumber,
+      personPhoto: parsed.personPhoto,
     };
 
     const user = await prisma.user.create({
@@ -67,21 +69,14 @@ export async function POST(request: Request) {
         email: parsed.email,
         passwordHash,
         collegeId: parsed.collegeId,
-        role: "OWNER", // Everyone can list items
+        phone: parsed.phone,
+        aadhaarNumber: parsed.aadhaarNumber,
+        personPhoto: parsed.personPhoto,
+        role: "USER", // Default role, user will select BORROWER or LENDER
       },
     });
 
-    // Create owner profile automatically (everyone can list items)
-    await prisma.ownerProfile.create({
-      data: {
-        userId: user.id,
-        phone: parsed.phone,
-        collegeName: college.name,
-        documentUrl: JSON.stringify(verificationData),
-        status: "APPROVED", // Auto-approved
-        collegeId: parsed.collegeId,
-      },
-    });
+    // Don't create owner profile yet - user will choose role first
 
     return NextResponse.json(
       { id: user.id, email: user.email, name: user.name },

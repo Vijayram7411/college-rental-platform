@@ -13,7 +13,7 @@ export default async function OwnerOrdersPage() {
       redirect("/login?callbackUrl=/owner/orders");
     }
 
-    if (role !== "OWNER" && role !== "ADMIN") {
+    if (role !== "OWNER" && role !== "ADMIN" && role !== "LENDER") {
       redirect("/");
     }
 

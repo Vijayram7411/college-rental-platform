@@ -63,7 +63,8 @@ export default function RootLayout({
                     <h3 className="mb-3 text-xs font-semibold uppercase text-gray-400">Policy</h3>
                     <ul className="space-y-2 text-sm">
                       <li><a href="#" className="hover:underline">Return Policy</a></li>
-                      <li><a href="#" className="hover:underline">Terms Of Use</a></li>
+                      <li><a href="/terms" className="hover:underline">Terms & Conditions</a></li>
+                      <li><a href="#" className="hover:underline">Privacy Policy</a></li>
                       <li><a href="#" className="hover:underline">Security</a></li>
                     </ul>
                   </div>

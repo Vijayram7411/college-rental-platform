@@ -95,21 +95,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return true;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
+      // On initial sign in
       if (user) {
         token.id = user.id;
         token.role = (user as any).role;
         token.collegeId = (user as any).collegeId;
       }
       
-      // Fetch fresh user data if collegeId is missing
-      if (!token.collegeId && token.email) {
+      // Always fetch fresh user data from database to ensure role is up-to-date
+      if (token.email) {
         const dbUser = await prisma.user.findUnique({
           where: { email: token.email },
+          select: { id: true, role: true, collegeId: true },
         });
+        
         if (dbUser) {
-          token.collegeId = dbUser.collegeId;
+          token.id = dbUser.id;
           token.role = dbUser.role;
+          token.collegeId = dbUser.collegeId;
         }
       }
       

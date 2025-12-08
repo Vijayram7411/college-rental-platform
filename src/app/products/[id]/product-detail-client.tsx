@@ -15,6 +15,7 @@ type ProductDetailClientProps = {
     originalPricePerMonth: number | null;
     rating: number | null;
     ratingCount: number | null;
+    contactNumber: string | null;
     category: { name: string } | null;
     owner: { name: string | null; email: string | null };
     reviews: Array<{
@@ -197,6 +198,40 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
             View Cart
           </Link>
         </div>
+
+        {/* Contact Information */}
+        {product.contactNumber && (
+          <div className="flipkart-shadow rounded-sm bg-white p-4">
+            <h3 className="mb-3 text-sm font-bold text-[#212121]">
+              Contact Lender
+            </h3>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 rounded-sm bg-blue-50 p-3">
+                <span className="text-2xl">📱</span>
+                <div className="flex-1">
+                  <p className="text-xs text-gray-600">Phone / WhatsApp</p>
+                  <p className="text-sm font-bold text-[#212121]">
+                    {product.contactNumber}
+                  </p>
+                </div>
+              </div>
+              <a
+                href={`tel:${product.contactNumber}`}
+                className="block rounded-sm bg-[#388e3c] px-4 py-2 text-center text-sm font-bold text-white hover:bg-[#2d7a2e]"
+              >
+                📞 Call Now
+              </a>
+              <a
+                href={`https://wa.me/91${product.contactNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-sm bg-[#25d366] px-4 py-2 text-center text-sm font-bold text-white hover:bg-[#1fb855]"
+              >
+                💬 WhatsApp
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

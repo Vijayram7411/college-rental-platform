@@ -15,7 +15,7 @@ export default async function OwnerProductsPage() {
       redirect("/login?callbackUrl=/owner/products");
     }
 
-    if (role !== "OWNER" && role !== "ADMIN") {
+    if (role !== "OWNER" && role !== "ADMIN" && role !== "LENDER") {
       redirect("/");
     }
 
@@ -29,6 +29,12 @@ export default async function OwnerProductsPage() {
       include: { category: true },
       orderBy: { createdAt: "desc" },
     });
+
+    // Ensure images field is valid JSON
+    const productsWithValidImages = products.map(p => ({
+      ...p,
+      images: p.images || "[]",
+    }));
 
     return (
       <div className="space-y-4">
@@ -59,7 +65,7 @@ export default async function OwnerProductsPage() {
           </div>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((p: any) => (
+            {productsWithValidImages.map((p: any) => (
               <div key={p.id} className="relative">
                 <ProductCard product={p} />
                 <div className="mt-2 flex gap-2">

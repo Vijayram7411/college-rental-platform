@@ -17,7 +17,7 @@ export default async function OwnerProductDetailPage({
       redirect("/login?callbackUrl=/owner/products");
     }
 
-    if (role !== "OWNER" && role !== "ADMIN") {
+    if (role !== "OWNER" && role !== "ADMIN" && role !== "LENDER") {
       redirect("/");
     }
 

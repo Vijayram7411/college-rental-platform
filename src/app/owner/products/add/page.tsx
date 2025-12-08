@@ -31,6 +31,7 @@ export default function AddProductPage() {
     originalPricePerMonth: "",
     minRentalDays: "1",
     maxRentalDays: "30",
+    contactNumber: "",
   });
 
   function updateField(field: string, value: string) {
@@ -316,6 +317,30 @@ export default function AddProductPage() {
               className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
             />
           </div>
+        </div>
+
+        {/* Contact Information */}
+        <div className="space-y-2">
+          <label className="block text-sm font-semibold text-[#212121]">
+            Contact Number <span className="text-red-600">*</span>
+          </label>
+          <div className="relative">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600">
+              📱
+            </span>
+            <input
+              type="tel"
+              required
+              value={form.contactNumber}
+              onChange={(e) => updateField("contactNumber", e.target.value)}
+              placeholder="Enter your phone or WhatsApp number"
+              pattern="[0-9]{10}"
+              className="w-full rounded-sm border border-gray-300 py-3 pl-12 pr-4 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+            />
+          </div>
+          <p className="text-xs text-gray-500">
+            Borrowers will use this to contact you. Enter 10-digit mobile number.
+          </p>
         </div>
 
         {/* Product Images */}

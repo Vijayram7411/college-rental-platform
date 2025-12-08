@@ -4,6 +4,42 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// College name variations for better matching
+const collegeVariations: Record<string, string[]> = {
+  "Sahyadri College of Engineering & Management": [
+    "SAHYADRI",
+    "SAHYADRI COLLEGE",
+    "SCEM",
+    "SAHYADRI ENGINEERING",
+  ],
+  "National Institute of Technology Karnataka (NITK)": [
+    "NITK",
+    "NIT KARNATAKA",
+    "NIT SURATHKAL",
+    "NATIONAL INSTITUTE OF TECHNOLOGY",
+  ],
+  "St. Aloysius College": [
+    "ST ALOYSIUS",
+    "ST. ALOYSIUS",
+    "ALOYSIUS COLLEGE",
+    "SAC",
+  ],
+  "NITTE University": [
+    "NITTE",
+    "NITTE UNIVERSITY",
+    "NMAM",
+  ],
+  // Add more as needed
+};
+
+function getCollegeVariations(collegeName: string): string {
+  const variations = collegeVariations[collegeName] || [];
+  if (variations.length > 0) {
+    return `\n\nAcceptable variations: ${variations.join(", ")}`;
+  }
+  return "";
+}
+
 export async function verifyStudentID(
   idImageBase64: string,
   selectedCollegeName: string
@@ -11,6 +47,8 @@ export async function verifyStudentID(
   try {
     // Remove data URL prefix if present
     const base64Image = idImageBase64.replace(/^data:image\/\w+;base64,/, "");
+
+    const variations = getCollegeVariations(selectedCollegeName);
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
@@ -22,12 +60,13 @@ export async function verifyStudentID(
               type: "text",
               text: `Analyze this student ID card image and extract the college/university name. 
               
-              The user claims this ID is from: "${selectedCollegeName}"
+              The user claims this ID is from: "${selectedCollegeName}"${variations}
               
               Please:
               1. Identify the college/university name shown on the ID
-              2. Determine if it matches "${selectedCollegeName}" (consider variations, abbreviations, and full names)
-              3. Respond in JSON format with:
+              2. Determine if it matches "${selectedCollegeName}" (consider variations, abbreviations, acronyms, and full names)
+              3. Look for college logo, name, or any identifying marks
+              4. Respond in JSON format with:
               {
                 "collegeName": "extracted college name",
                 "isMatch": true/false,
@@ -35,7 +74,10 @@ export async function verifyStudentID(
                 "reasoning": "brief explanation"
               }
               
-              If the image is unclear or not a student ID, set confidence to "low" and isMatch to false.`,
+              Important:
+              - Match should be true if the ID clearly shows the college name or its common abbreviation
+              - Set confidence to "low" if image is unclear, blurry, or not a student ID
+              - Set confidence to "high" if college name/logo is clearly visible and matches`,
             },
             {
               type: "image_url",

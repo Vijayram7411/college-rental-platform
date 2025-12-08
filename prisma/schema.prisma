@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -35,6 +35,11 @@ model User {
   role          String           @default("USER")
 
   passwordHash  String?
+  
+  // Additional verification fields
+  phone         String?
+  aadhaarNumber String?  // Stores only first 4 and last 4 digits (8 digits total)
+  personPhoto   String?
 
   college       College?         @relation(fields: [collegeId], references: [id])
   collegeId     String?
@@ -93,6 +98,8 @@ model Product {
 
   rating                Float?        @default(0)
   ratingCount           Int?          @default(0)
+  
+  contactNumber         String?       // Lender contact (phone/WhatsApp)
 
   owner        User     @relation("OwnerProducts", fields: [ownerId], references: [id])
   ownerId      String

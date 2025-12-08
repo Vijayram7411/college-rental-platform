@@ -121,16 +121,31 @@ export function MainHeader() {
           </Link>
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-1 lg:flex">
-            <NavLink href="/catalog" label="Catalog" />
-            <NavLink href="/cart" label="Cart" />
-            {session && <NavLink href="/me/borrowed" label="Borrowed" />}
-            {session && <NavLink href="/me/profile" label="Profile" />}
-            {(role === "OWNER" || role === "ADMIN") && (
+            {/* Show for BORROWER or LENDER */}
+            {(role === "BORROWER" || role === "LENDER") && (
+              <NavLink href="/catalog" label="Catalog" />
+            )}
+            
+            {/* BORROWER specific */}
+            {role === "BORROWER" && (
               <>
-                <NavLink href="/owner/products" label="My Products" />
-                <NavLink href="/owner/orders" label="Seller Orders" />
+                <NavLink href="/cart" label="Cart" />
+                <NavLink href="/me/borrowed" label="My Rentals" />
               </>
             )}
+            
+            {/* LENDER specific */}
+            {role === "LENDER" && (
+              <>
+                <NavLink href="/owner/products" label="My Products" />
+                <NavLink href="/owner/orders" label="My Orders" />
+              </>
+            )}
+            
+            {/* Common for logged in users */}
+            {session && <NavLink href="/me/profile" label="Profile" />}
+            
+            {/* Admin */}
             {role === "ADMIN" && (
               <NavLink href="/admin/owners" label="Admin" />
             )}
@@ -169,6 +184,20 @@ export function MainHeader() {
             )}
             {session && (
               <div className="flex items-center gap-4">
+                {/* Switch Mode Button */}
+                {(role === "BORROWER" || role === "LENDER") && (
+                  <Link
+                    href="/select-role"
+                    className="flex items-center gap-2 rounded-sm bg-[#ff9f00] px-4 py-1.5 text-sm font-bold text-white hover:bg-[#e68a00] transition-colors"
+                    title="Switch between Borrow and Lend modes"
+                  >
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    Switch Mode
+                  </Link>
+                )}
+                
                 <div className="flex items-center gap-2">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold text-[#2874f0]">
                     {user?.name?.[0]?.toUpperCase() ?? "U"}
@@ -179,7 +208,7 @@ export function MainHeader() {
                     </span>
                     {role && (
                       <span className="text-[10px] text-[#ffe500]">
-                        {role}
+                        {role === "BORROWER" ? "🛒 Borrower" : role === "LENDER" ? "💼 Lender" : role}
                       </span>
                     )}
                   </div>
@@ -200,16 +229,31 @@ export function MainHeader() {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#2874f0] border-t border-[#1c5bbf]">
           <nav className="py-2">
-            <MobileNavLink href="/catalog" label="Catalog" onClick={closeMobileMenu} />
-            <MobileNavLink href="/cart" label="Cart" onClick={closeMobileMenu} />
-            {session && <MobileNavLink href="/me/borrowed" label="Borrowed" onClick={closeMobileMenu} />}
-            {session && <MobileNavLink href="/me/profile" label="Profile" onClick={closeMobileMenu} />}
-            {(role === "OWNER" || role === "ADMIN") && (
+            {/* Show for BORROWER or LENDER */}
+            {(role === "BORROWER" || role === "LENDER") && (
+              <MobileNavLink href="/catalog" label="Catalog" onClick={closeMobileMenu} />
+            )}
+            
+            {/* BORROWER specific */}
+            {role === "BORROWER" && (
               <>
-                <MobileNavLink href="/owner/products" label="My Products" onClick={closeMobileMenu} />
-                <MobileNavLink href="/owner/orders" label="Seller Orders" onClick={closeMobileMenu} />
+                <MobileNavLink href="/cart" label="Cart" onClick={closeMobileMenu} />
+                <MobileNavLink href="/me/borrowed" label="My Rentals" onClick={closeMobileMenu} />
               </>
             )}
+            
+            {/* LENDER specific */}
+            {role === "LENDER" && (
+              <>
+                <MobileNavLink href="/owner/products" label="My Products" onClick={closeMobileMenu} />
+                <MobileNavLink href="/owner/orders" label="My Orders" onClick={closeMobileMenu} />
+              </>
+            )}
+            
+            {/* Common */}
+            {session && <MobileNavLink href="/me/profile" label="Profile" onClick={closeMobileMenu} />}
+            
+            {/* Admin */}
             {role === "ADMIN" && (
               <MobileNavLink href="/admin/owners" label="Admin" onClick={closeMobileMenu} />
             )}
@@ -238,11 +282,26 @@ export function MainHeader() {
                     </span>
                     {role && (
                       <span className="text-xs text-[#ffe500]">
-                        {role}
+                        {role === "BORROWER" ? "🛒 Borrower" : role === "LENDER" ? "💼 Lender" : role}
                       </span>
                     )}
                   </div>
                 </div>
+                
+                {/* Switch Mode Button - Mobile */}
+                {(role === "BORROWER" || role === "LENDER") && (
+                  <Link
+                    href="/select-role"
+                    onClick={closeMobileMenu}
+                    className="flex items-center justify-center gap-2 w-full rounded-sm bg-[#ff9f00] px-4 py-2 text-sm font-bold text-white hover:bg-[#e68a00]"
+                  >
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                    Switch Mode
+                  </Link>
+                )}
+                
                 <button
                   onClick={() => {
                     closeMobileMenu();

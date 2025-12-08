@@ -11,7 +11,7 @@ export default async function CatalogPage() {
       prisma.product.findMany({
         where: { 
           isActive: true,
-          collegeId: collegeId || undefined,
+          ...(collegeId ? { collegeId } : {}),
         },
         include: {
           category: true,

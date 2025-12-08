@@ -21,13 +21,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Check if user is admin OR has approved owner profile
+    // Check if user is admin, lender, or has approved owner profile
     const isAdmin = role === "ADMIN";
+    const isLender = role === "LENDER";
     const hasApprovedProfile = user.ownerProfile?.status === "APPROVED";
 
-    if (!isAdmin && !hasApprovedProfile) {
+    if (!isAdmin && !isLender && !hasApprovedProfile) {
       return NextResponse.json(
-        { error: "You need an approved owner profile to add products" },
+        { error: "You need to be a lender or have an approved owner profile to add products" },
         { status: 403 }
       );
     }
@@ -41,10 +42,11 @@ export async function POST(request: Request) {
       originalPricePerMonth,
       thumbnailUrl,
       images,
+      contactNumber,
     } = body;
 
     // Validation
-    if (!title || !description || !categorySlug || !basePricePerMonth) {
+    if (!title || !description || !categorySlug || !basePricePerMonth || !contactNumber) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -88,6 +90,7 @@ export async function POST(request: Request) {
         originalPricePerMonth,
         thumbnailUrl: thumbnailUrl || images[0],
         images: JSON.stringify(images), // Store as JSON string for SQLite
+        contactNumber,
         ownerId: user.id,
         collegeId: user.collegeId,
         isActive: true,
@@ -100,8 +103,9 @@ export async function POST(request: Request) {
     );
   } catch (error: any) {
     console.error("Error adding product:", error);
+    console.error("Error details:", error.message, error.stack);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error", details: error.message },
       { status: 500 }
     );
   }
