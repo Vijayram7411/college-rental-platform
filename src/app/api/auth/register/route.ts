@@ -3,6 +3,7 @@ import { hash } from "bcryptjs";
 
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validation";
+import { verifyBothSides } from "@/lib/id-verification";
 
 export async function POST(request: Request) {
   try {
@@ -29,6 +30,24 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: "Invalid college selected" },
         { status: 400 },
+      );
+    }
+
+    // Verify student ID matches selected college
+    const verificationResult = await verifyBothSides(
+      parsed.idCardFront,
+      parsed.idCardBack,
+      college.name
+    );
+
+    if (!verificationResult.isValid) {
+      return NextResponse.json(
+        {
+          error: "ID verification failed",
+          message: verificationResult.message,
+          details: verificationResult.details,
+        },
+        { status: 400 }
       );
     }
 
