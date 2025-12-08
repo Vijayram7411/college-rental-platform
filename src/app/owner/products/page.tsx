@@ -60,7 +60,9 @@ export default async function OwnerProductsPage() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p: any) => (
               <div key={p.id} className="relative">
-                <ProductCard product={p} />
+                <a href={`/owner/products/${p.id}`} className="block">
+                  <ProductCard product={p} />
+                </a>
                 <ProductActions productId={p.id} productTitle={p.title} />
               </div>
             ))}
