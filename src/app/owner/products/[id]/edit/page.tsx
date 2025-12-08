@@ -127,16 +127,20 @@ export default function EditProductPage() {
   }
 
   function removeImage(index: number) {
-    setImagePreviews(imagePreviews.filter((_, i) => i !== index));
+    // Remove from previews
+    const newPreviews = imagePreviews.filter((_, i) => i !== index);
+    setImagePreviews(newPreviews);
     
-    // If it's a new file, remove from imageFiles
-    const existingCount = existingImages.length;
-    if (index >= existingCount) {
-      const fileIndex = index - existingCount;
-      setImageFiles(imageFiles.filter((_, i) => i !== fileIndex));
+    // Check if this is an existing image or a new upload
+    if (index < existingImages.length) {
+      // It's an existing image
+      const newExisting = existingImages.filter((_, i) => i !== index);
+      setExistingImages(newExisting);
     } else {
-      // Remove from existing images
-      setExistingImages(existingImages.filter((_, i) => i !== index));
+      // It's a new file
+      const fileIndex = index - existingImages.length;
+      const newFiles = imageFiles.filter((_, i) => i !== fileIndex);
+      setImageFiles(newFiles);
     }
   }
 
@@ -172,12 +176,19 @@ export default function EditProductPage() {
     }
 
     try {
-      // Convert new images to base64
-      const base64Images: string[] = [...existingImages];
+      // Combine existing images with new uploads
+      const allImages: string[] = [];
+      
+      // Add existing images that are still in previews
+      for (let i = 0; i < existingImages.length; i++) {
+        allImages.push(existingImages[i]);
+      }
+      
+      // Convert and add new images
       for (let i = 0; i < imageFiles.length; i++) {
         try {
           const base64 = await convertToBase64(imageFiles[i]);
-          base64Images.push(base64);
+          allImages.push(base64);
         } catch (_err) {
           setError(`Failed to process image ${i + 1}. Please try again.`);
           setLoading(false);
@@ -198,8 +209,8 @@ export default function EditProductPage() {
           originalPricePerMonth: form.originalPricePerMonth
             ? parseInt(form.originalPricePerMonth)
             : null,
-          images: base64Images,
-          thumbnailUrl: base64Images[0],
+          images: allImages,
+          thumbnailUrl: allImages[0],
         }),
       });
 
