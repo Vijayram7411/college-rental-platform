@@ -51,25 +51,27 @@ export default function CheckoutPage() {
     <div className="mx-auto w-full max-w-lg space-y-4">
       <h1 className="text-2xl font-semibold text-zinc-900">Checkout</h1>
       <p className="text-sm text-zinc-600">
-        Enter your shipping address to confirm your rental order.
+        Enter your pick up point or address to confirm your rental order.
       </p>
       <form onSubmit={handleSubmit} className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4 text-sm">
         <div className="space-y-1">
-          <label className="block text-xs font-medium text-zinc-800">Address line 1</label>
+          <label className="block text-xs font-medium text-zinc-800">Pick up point / Address line 1</label>
           <input
             type="text"
             required
             value={form.line1}
             onChange={(e) => updateField("line1", e.target.value)}
+            placeholder="e.g., College Library, Main Gate"
             className="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
           />
         </div>
         <div className="space-y-1">
-          <label className="block text-xs font-medium text-zinc-800">Address line 2</label>
+          <label className="block text-xs font-medium text-zinc-800">Additional details (optional)</label>
           <input
             type="text"
             value={form.line2}
             onChange={(e) => updateField("line2", e.target.value)}
+            placeholder="e.g., Near hostel block A"
             className="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
           />
         </div>

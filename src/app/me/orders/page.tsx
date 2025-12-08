@@ -61,7 +61,7 @@ export default async function OrdersPage() {
                 </ul>
                 {order.shipping && (
                   <p className="mt-2 text-xs text-zinc-500">
-                    Ship to: {order.shipping.line1}, {order.shipping.city}, {order.shipping.state}
+                    📍 Pick up point: {order.shipping.line1}, {order.shipping.city}, {order.shipping.state}
                   </p>
                 )}
               </li>
