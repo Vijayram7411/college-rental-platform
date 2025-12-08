@@ -1,19 +1,102 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect, ChangeEvent } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+
+interface College {
+  id: string;
+  name: string;
+  domain: string;
+}
 
 export default function RegisterPage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [collegeId, setCollegeId] = useState("");
+  const [phone, setPhone] = useState("");
+  const [collegeEmail, setCollegeEmail] = useState("");
+  const [idCardFront, setIdCardFront] = useState("");
+  const [idCardBack, setIdCardBack] = useState("");
+  const [frontPreview, setFrontPreview] = useState("");
+  const [backPreview, setBackPreview] = useState("");
+  const [colleges, setColleges] = useState<College[]>([]);
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Fetch colleges list
+    fetch("/api/colleges")
+      .then((res) => res.json())
+      .then((data) => setColleges(data))
+      .catch(() => setError("Failed to load colleges"));
+  }, []);
+
+  async function convertToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handleImageUpload(e: ChangeEvent<HTMLInputElement>, side: 'front' | 'back') {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError(`ID card ${side} image is too large. Maximum size is 5MB`);
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      setError('Please upload an image file');
+      return;
+    }
+
+    setUploading(true);
+    setError(null);
+
+    try {
+      const base64 = await convertToBase64(file);
+      
+      if (side === 'front') {
+        setIdCardFront(base64);
+        setFrontPreview(base64);
+      } else {
+        setIdCardBack(base64);
+        setBackPreview(base64);
+      }
+    } catch (_err) {
+      setError(`Failed to process ${side} image`);
+    } finally {
+      setUploading(false);
+    }
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    
+    // Validation
+    if (!collegeId) {
+      setError("Please select your college");
+      return;
+    }
+    
+    if (!idCardFront || !idCardBack) {
+      setError("Please upload both sides of your student ID");
+      return;
+    }
+    
+    if (!phone) {
+      setError("Please enter your phone number");
+      return;
+    }
+    
     setLoading(true);
     setError(null);
 
@@ -21,7 +104,16 @@ export default function RegisterPage() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ 
+          name, 
+          email, 
+          password, 
+          collegeId,
+          phone,
+          idCardFront,
+          idCardBack,
+          collegeEmail: collegeEmail || undefined,
+        }),
       });
 
       if (!res.ok) {
@@ -75,6 +167,7 @@ export default function RegisterPage() {
               className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
             />
           </div>
+          
           <div className="space-y-2">
             <label htmlFor="email" className="block text-sm font-semibold text-[#212121]">
               Email Address
@@ -89,6 +182,7 @@ export default function RegisterPage() {
               className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
             />
           </div>
+          
           <div className="space-y-2">
             <label htmlFor="password" className="block text-sm font-semibold text-[#212121]">
               Password
@@ -103,6 +197,101 @@ export default function RegisterPage() {
               placeholder="Minimum 6 characters"
               className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
             />
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="college" className="block text-sm font-semibold text-[#212121]">
+              Select Your College <span className="text-red-500">*</span>
+            </label>
+            <select
+              id="college"
+              value={collegeId}
+              onChange={(e) => setCollegeId(e.target.value)}
+              required
+              className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+            >
+              <option value="">Choose your college</option>
+              {colleges.map((college) => (
+                <option key={college.id} value={college.id}>
+                  {college.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="phone" className="block text-sm font-semibold text-[#212121]">
+              Phone Number <span className="text-red-500">*</span>
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+              placeholder="Enter your phone number"
+              className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-[#212121]">
+              Student ID Card <span className="text-red-500">*</span>
+            </label>
+            <p className="text-xs text-gray-600 mb-2">
+              Upload clear photos of both sides of your student ID
+            </p>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="idFront" className="block text-xs font-medium text-gray-700 mb-1">
+                  Front Side
+                </label>
+                <input
+                  id="idFront"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload(e, 'front')}
+                  required
+                  className="w-full text-sm"
+                />
+                {frontPreview && (
+                  <img src={frontPreview} alt="ID Front" className="mt-2 w-full h-32 object-cover rounded border" />
+                )}
+              </div>
+              
+              <div>
+                <label htmlFor="idBack" className="block text-xs font-medium text-gray-700 mb-1">
+                  Back Side
+                </label>
+                <input
+                  id="idBack"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload(e, 'back')}
+                  required
+                  className="w-full text-sm"
+                />
+                {backPreview && (
+                  <img src={backPreview} alt="ID Back" className="mt-2 w-full h-32 object-cover rounded border" />
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="collegeEmail" className="block text-sm font-semibold text-[#212121]">
+              College Email (Optional)
+            </label>
+            <input
+              id="collegeEmail"
+              type="email"
+              value={collegeEmail}
+              onChange={(e) => setCollegeEmail(e.target.value)}
+              placeholder="your.name@college.edu"
+              className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+            />
+            <p className="text-xs text-gray-500">For additional verification</p>
           </div>
           {error && (
             <div className="rounded-sm bg-red-50 p-3 text-sm text-red-600">

@@ -4,6 +4,11 @@ export const registerSchema = z.object({
   name: z.string().min(1).max(100),
   email: z.string().email(),
   password: z.string().min(6).max(100),
+  collegeId: z.string().cuid(),
+  phone: z.string().min(5).max(20),
+  idCardFront: z.string().min(1),
+  idCardBack: z.string().min(1),
+  collegeEmail: z.string().email().optional(),
 });
 
 export const createProductSchema = z.object({

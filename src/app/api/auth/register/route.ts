@@ -20,46 +20,46 @@ export async function POST(request: Request) {
       );
     }
 
-    // Extract college domain from email
-    const emailDomain = parsed.email.split("@")[1]?.toLowerCase();
-    
-    if (!emailDomain) {
+    // Verify college exists
+    const college = await prisma.college.findUnique({
+      where: { id: parsed.collegeId },
+    });
+
+    if (!college) {
       return NextResponse.json(
-        { error: "Invalid email format" },
+        { error: "Invalid college selected" },
         { status: 400 },
       );
     }
 
-    // Find or create college based on email domain
-    let college = await prisma.college.findUnique({
-      where: { domain: emailDomain },
-    });
-
-    if (!college) {
-      // Auto-create college from domain
-      const collegeName = emailDomain
-        .split(".")[0]
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
-
-      college = await prisma.college.create({
-        data: {
-          name: collegeName,
-          domain: emailDomain,
-          isActive: true,
-        },
-      });
-    }
-
     const passwordHash = await hash(parsed.password, 10);
+
+    // Store student ID images as JSON
+    const verificationData = {
+      idCardFront: parsed.idCardFront,
+      idCardBack: parsed.idCardBack,
+      collegeEmail: parsed.collegeEmail || null,
+      phone: parsed.phone,
+    };
 
     const user = await prisma.user.create({
       data: {
         name: parsed.name,
         email: parsed.email,
         passwordHash,
-        collegeId: college.id,
+        collegeId: parsed.collegeId,
+      },
+    });
+
+    // Create owner profile automatically (everyone can list items)
+    await prisma.ownerProfile.create({
+      data: {
+        userId: user.id,
+        phone: parsed.phone,
+        collegeName: college.name,
+        documentUrl: JSON.stringify(verificationData),
+        status: "APPROVED", // Auto-approved
+        collegeId: parsed.collegeId,
       },
     });
 
