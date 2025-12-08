@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { compare } from "bcryptjs";
 
@@ -14,6 +15,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: "/login",
   },
   providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     Credentials({
       name: "Credentials",
       credentials: {
@@ -48,12 +53,66 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
+    async signIn({ user, account }) {
+      // For OAuth providers (Google), assign college based on email domain
+      if (account?.provider === "google" && user.email) {
+        const emailDomain = user.email.split("@")[1]?.toLowerCase();
+        
+        if (emailDomain) {
+          // Find or create college
+          let college = await prisma.college.findUnique({
+            where: { domain: emailDomain },
+          });
+
+          if (!college) {
+            const collegeName = emailDomain
+              .split(".")[0]
+              .split("-")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ");
+
+            college = await prisma.college.create({
+              data: {
+                name: collegeName,
+                domain: emailDomain,
+                isActive: true,
+              },
+            });
+          }
+
+          // Update user with collegeId if not set
+          const existingUser = await prisma.user.findUnique({
+            where: { email: user.email },
+          });
+
+          if (existingUser && !existingUser.collegeId) {
+            await prisma.user.update({
+              where: { id: existingUser.id },
+              data: { collegeId: college.id },
+            });
+          }
+        }
+      }
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.role = (user as any).role;
         token.collegeId = (user as any).collegeId;
       }
+      
+      // Fetch fresh user data if collegeId is missing
+      if (!token.collegeId && token.email) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: token.email },
+        });
+        if (dbUser) {
+          token.collegeId = dbUser.collegeId;
+          token.role = dbUser.role;
+        }
+      }
+      
       return token;
     },
     async session({ session, token }) {
