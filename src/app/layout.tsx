@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthSessionProvider } from "@/components/session-provider";
 import { MainHeader } from "@/components/main-header";
+import { ToastProvider } from "@/components/toast";
+import { Breadcrumb } from "@/components/breadcrumb";
+import { FloatingActionButton } from "@/components/floating-action-button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,11 +33,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#f1f3f6] text-[#212121]`}
       >
         <AuthSessionProvider>
-          <div className="flex min-h-screen flex-col">
-            <MainHeader />
-            <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-4">
-              {children}
-            </main>
+          <ToastProvider>
+            <div className="flex min-h-screen flex-col">
+              <MainHeader />
+              <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-4">
+                <Breadcrumb />
+                {children}
+              </main>
             <footer className="bg-[#172337] py-8 text-white">
               <div className="mx-auto max-w-7xl px-4">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
@@ -76,7 +81,9 @@ export default function RootLayout({
                 </div>
               </div>
             </footer>
+            <FloatingActionButton />
           </div>
+          </ToastProvider>
         </AuthSessionProvider>
       </body>
     </html>
