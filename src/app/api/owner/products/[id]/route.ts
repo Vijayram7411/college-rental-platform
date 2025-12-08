@@ -167,3 +167,79 @@ export async function PUT(
     );
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const session = await auth();
+    const role = (session?.user as any)?.role as string | undefined;
+
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Check if product exists
+    const product = await prisma.product.findUnique({
+      where: { id: params.id },
+    });
+
+    if (!product) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
+
+    // Check if user owns this product or is admin
+    if (product.ownerId !== user.id && role !== "ADMIN") {
+      return NextResponse.json(
+        { error: "You don't have permission to delete this product" },
+        { status: 403 }
+      );
+    }
+
+    // Check if product has active orders
+    const activeOrders = await prisma.rentalOrder.findFirst({
+      where: {
+        items: {
+          some: {
+            productId: params.id,
+          },
+        },
+        status: {
+          in: ["PENDING", "ACTIVE"],
+        },
+      },
+    });
+
+    if (activeOrders) {
+      return NextResponse.json(
+        { error: "Cannot delete product with active orders" },
+        { status: 400 }
+      );
+    }
+
+    // Delete the product
+    await prisma.product.delete({
+      where: { id: params.id },
+    });
+
+    return NextResponse.json(
+      { message: "Product deleted successfully" },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("Error deleting product:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}

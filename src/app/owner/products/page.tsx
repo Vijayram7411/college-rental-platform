@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/product-card";
+import { ProductActions } from "@/components/product-actions";
 
 export default async function OwnerProductsPage() {
   try {
@@ -60,14 +61,7 @@ export default async function OwnerProductsPage() {
             {products.map((p: any) => (
               <div key={p.id} className="relative">
                 <ProductCard product={p} />
-                <div className="mt-2 flex gap-2">
-                  <a
-                    href={`/owner/products/${p.id}/edit`}
-                    className="flex-1 rounded-sm bg-[#2874f0] px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#1c5bbf]"
-                  >
-                    ✏️ Edit
-                  </a>
-                </div>
+                <ProductActions productId={p.id} productTitle={p.title} />
               </div>
             ))}
           </div>
