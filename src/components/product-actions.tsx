@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 interface ProductActionsProps {
   productId: string;
   productTitle: string;
+  showEditButton?: boolean;
 }
 
-export function ProductActions({ productId, productTitle }: ProductActionsProps) {
+export function ProductActions({ productId, productTitle, showEditButton = true }: ProductActionsProps) {
   const router = useRouter();
   const [deleting, setDeleting] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -42,21 +43,33 @@ export function ProductActions({ productId, productTitle }: ProductActionsProps)
 
   return (
     <>
-      <div className="mt-2 flex gap-2">
-        <a
-          href={`/owner/products/${productId}/edit`}
-          className="flex-1 rounded-sm bg-[#2874f0] px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#1c5bbf]"
-        >
-          ✏️ Edit
-        </a>
-        <button
-          onClick={() => setShowConfirm(true)}
-          disabled={deleting}
-          className="flex-1 rounded-sm bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60"
-        >
-          🗑️ Delete
-        </button>
-      </div>
+      {showEditButton ? (
+        <div className="mt-2 flex gap-2">
+          <a
+            href={`/owner/products/${productId}/edit`}
+            className="flex-1 rounded-sm bg-[#2874f0] px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#1c5bbf]"
+          >
+            ✏️ Edit
+          </a>
+          <button
+            onClick={() => setShowConfirm(true)}
+            disabled={deleting}
+            className="flex-1 rounded-sm bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60"
+          >
+            🗑️ Delete
+          </button>
+        </div>
+      ) : (
+        <div className="mt-2">
+          <button
+            onClick={() => setShowConfirm(true)}
+            disabled={deleting}
+            className="w-full rounded-sm bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60"
+          >
+            🗑️ Delete
+          </button>
+        </div>
+      )}
 
       {error && (
         <div className="mt-2 rounded-sm bg-red-50 p-2 text-xs text-red-600">
