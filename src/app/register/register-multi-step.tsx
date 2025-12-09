@@ -4,11 +4,7 @@ import { FormEvent, useState, useEffect, ChangeEvent } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-interface College {
-  id: string;
-  name: string;
-  domain: string;
-}
+// Removed College interface - now using text input
 
 export default function RegisterMultiStep() {
   const router = useRouter();
@@ -32,38 +28,11 @@ export default function RegisterMultiStep() {
   const [collegeEmail, setCollegeEmail] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   
-  const [colleges, setColleges] = useState<College[]>([]);
-  const [collegesLoading, setCollegesLoading] = useState(true);
+  // Removed college dropdown - now using text input
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    setCollegesLoading(true);
-    fetch("/api/colleges")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch colleges");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setColleges(data);
-        } else {
-          console.error("Colleges data is not an array:", data);
-          setColleges([]); // Set empty array as fallback
-          setError("Failed to load colleges. Please refresh the page.");
-        }
-      })
-      .catch((err) => {
-        console.error("Error loading colleges:", err);
-        setColleges([]); // Set empty array as fallback
-        setError("Failed to load colleges. Please refresh the page.");
-      })
-      .finally(() => {
-        setCollegesLoading(false);
-      });
-  }, []);
+  // Removed college fetching - now using text input instead of dropdown
 
   async function convertToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -131,8 +100,8 @@ export default function RegisterMultiStep() {
     
     console.log("Step 2 submit started");
     
-    if (!collegeId) {
-      setError("Please select your college");
+    if (!collegeId || collegeId.trim().length < 3) {
+      setError("Please enter your college name (minimum 3 characters)");
       return;
     }
     
@@ -335,25 +304,18 @@ export default function RegisterMultiStep() {
           <form onSubmit={handleStep2Submit} className="space-y-4">
             <div className="space-y-2">
               <label htmlFor="college" className="block text-sm font-semibold text-[#212121]">
-                Select Your College <span className="text-red-500">*</span>
+                College Name <span className="text-red-500">*</span>
               </label>
-              <select
+              <input
                 id="college"
+                type="text"
                 value={collegeId}
                 onChange={(e) => setCollegeId(e.target.value)}
                 required
-                disabled={collegesLoading}
-                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0] disabled:bg-gray-100"
-              >
-                <option value="">
-                  {collegesLoading ? "Loading colleges..." : "Choose your college"}
-                </option>
-                {Array.isArray(colleges) && colleges.map((college) => (
-                  <option key={college.id} value={college.id}>
-                    {college.name}
-                  </option>
-                ))}
-              </select>
+                placeholder="Enter your college name"
+                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+              />
+              <p className="text-xs text-gray-500">Enter the full name of your college</p>
             </div>
 
             <div className="space-y-2">
