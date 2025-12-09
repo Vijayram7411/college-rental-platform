@@ -1,0 +1,3 @@
+# Force fresh Prisma generation on each deploy
+!prisma/schema.prisma
+!prisma/migrations/
