@@ -33,10 +33,12 @@ export default function RegisterMultiStep() {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   
   const [colleges, setColleges] = useState<College[]>([]);
+  const [collegesLoading, setCollegesLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setCollegesLoading(true);
     fetch("/api/colleges")
       .then((res) => {
         if (!res.ok) {
@@ -49,12 +51,17 @@ export default function RegisterMultiStep() {
           setColleges(data);
         } else {
           console.error("Colleges data is not an array:", data);
+          setColleges([]); // Set empty array as fallback
           setError("Failed to load colleges. Please refresh the page.");
         }
       })
       .catch((err) => {
         console.error("Error loading colleges:", err);
+        setColleges([]); // Set empty array as fallback
         setError("Failed to load colleges. Please refresh the page.");
+      })
+      .finally(() => {
+        setCollegesLoading(false);
       });
   }, []);
 
@@ -335,10 +342,13 @@ export default function RegisterMultiStep() {
                 value={collegeId}
                 onChange={(e) => setCollegeId(e.target.value)}
                 required
-                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+                disabled={collegesLoading}
+                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0] disabled:bg-gray-100"
               >
-                <option value="">Choose your college</option>
-                {colleges.map((college) => (
+                <option value="">
+                  {collegesLoading ? "Loading colleges..." : "Choose your college"}
+                </option>
+                {Array.isArray(colleges) && colleges.map((college) => (
                   <option key={college.id} value={college.id}>
                     {college.name}
                   </option>
