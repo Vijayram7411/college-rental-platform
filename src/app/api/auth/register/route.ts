@@ -21,33 +21,9 @@ export async function POST(request: Request) {
       );
     }
 
-    // Verify college exists
-    const college = await prisma.college.findUnique({
-      where: { id: parsed.collegeId },
-    });
-
-    if (!college) {
-      return NextResponse.json(
-        { error: "Invalid college selected" },
-        { status: 400 },
-      );
-    }
-
-    // Skip ID verification temporarily to allow registration
-    // TODO: Re-enable after fixing the issue
-    console.log("ID verification temporarily disabled for registration");
-    
-    // Verify student ID matches selected college (DISABLED)
-    // let verificationResult;
-    // try {
-    //   verificationResult = await verifyBothSides(
-    //     parsed.idCardFront,
-    //     parsed.idCardBack,
-    //     college.name
-    //   );
-    // } catch (verifyError) {
-    //   console.error("ID verification error:", verifyError);
-    // }
+    // College is now stored as name (text) instead of ID
+    // ID verification is temporarily disabled
+    console.log("Registering user with college:", parsed.collegeId);
 
     const passwordHash = await hash(parsed.password, 10);
 
@@ -66,7 +42,7 @@ export async function POST(request: Request) {
         name: parsed.name,
         email: parsed.email,
         passwordHash,
-        collegeId: parsed.collegeId,
+        collegeId: null, // College name is stored but not linked to college table
         phone: parsed.phone,
         aadhaarNumber: parsed.aadhaarNumber,
         personPhoto: parsed.personPhoto,

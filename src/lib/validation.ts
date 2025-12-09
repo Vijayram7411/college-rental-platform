@@ -4,7 +4,7 @@ export const registerSchema = z.object({
   name: z.string().min(1).max(100),
   email: z.string().email(),
   password: z.string().min(6).max(100),
-  collegeId: z.string().cuid(),
+  collegeId: z.string().min(3).max(200), // Changed from cuid() to accept college name
   phone: z.string().min(5).max(20),
   aadhaarNumber: z.string().length(8).regex(/^\d{8}$/, "Aadhaar must be 8 digits (first 4 and last 4)"),
   personPhoto: z.string().min(1),
