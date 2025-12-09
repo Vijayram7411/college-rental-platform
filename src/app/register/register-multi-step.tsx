@@ -128,8 +128,6 @@ export default function RegisterMultiStep() {
     setLoading(true);
 
     try {
-      console.log("Sending registration request...");
-      
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -147,8 +145,6 @@ export default function RegisterMultiStep() {
         }),
       });
 
-      console.log("Registration response status:", res.status);
-
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         console.error("Registration failed:", data);
@@ -157,8 +153,6 @@ export default function RegisterMultiStep() {
         return;
       }
 
-      console.log("Registration successful, signing in...");
-
       const result = await signIn("credentials", {
         email,
         password,
@@ -166,15 +160,12 @@ export default function RegisterMultiStep() {
         callbackUrl: "/select-role",
       });
 
-      console.log("Sign in result:", result);
-
       setLoading(false);
 
       if (result?.error) {
         console.error("Sign in error:", result.error);
         router.push("/login");
       } else {
-        console.log("Redirecting to role selection...");
         router.push("/select-role");
       }
     } catch (err) {

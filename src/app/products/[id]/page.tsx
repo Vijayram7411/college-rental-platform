@@ -11,9 +11,6 @@ interface Params {
 export default async function ProductDetailPage({ params }: Params) {
   const { id } = await params;
   
-  console.log("=== Product Detail Page ===");
-  console.log("Product ID:", id);
-  
   try {
     const session = await auth();
     const userCollegeId = (session?.user as any)?.collegeId;
@@ -32,23 +29,10 @@ export default async function ProductDetailPage({ params }: Params) {
       },
     });
 
-    console.log("Product found:", product ? "YES" : "NO");
-    console.log("Product active:", product?.isActive);
-    console.log("User college:", userCollegeId);
-    console.log("Product college:", product?.collegeId);
-
     if (!product || !product.isActive) {
-      console.log("Product not found or inactive - showing 404");
       notFound();
     }
 
-    // Check college authorization
-    if (userCollegeId && product.collegeId && userCollegeId !== product.collegeId) {
-      console.log("College mismatch - access denied");
-      notFound();
-    }
-
-    console.log("Rendering product:", product.title);
     return <ProductDetailClient product={product} />;
   } catch (error: unknown) {
     if (
@@ -56,7 +40,6 @@ export default async function ProductDetailPage({ params }: Params) {
       typeof (error as any).digest === "string" &&
       (error as any).digest.startsWith("NEXT_")
     ) {
-      console.log("Next.js error - rethrowing");
       throw error;
     }
 

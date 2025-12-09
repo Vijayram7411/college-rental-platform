@@ -22,8 +22,6 @@ export async function POST(request: Request) {
 
     // College is now stored as simple text field
     // ID verification is disabled
-    console.log("Registering user with college:", parsed.collegeId);
-
     const passwordHash = await hash(parsed.password, 10);
 
     const user = await prisma.user.create({
