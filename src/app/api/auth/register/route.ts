@@ -3,7 +3,6 @@ import { hash } from "bcryptjs";
 
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validation";
-import { verifyBothSides } from "@/lib/id-verification";
 
 export async function POST(request: Request) {
   try {
@@ -26,16 +25,6 @@ export async function POST(request: Request) {
     console.log("Registering user with college:", parsed.collegeId);
 
     const passwordHash = await hash(parsed.password, 10);
-
-    // Store student ID images as JSON
-    const verificationData = {
-      idCardFront: parsed.idCardFront,
-      idCardBack: parsed.idCardBack,
-      collegeEmail: parsed.collegeEmail || null,
-      phone: parsed.phone,
-      aadhaarNumber: parsed.aadhaarNumber,
-      personPhoto: parsed.personPhoto,
-    };
 
     const user = await prisma.user.create({
       data: {
