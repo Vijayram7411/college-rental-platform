@@ -7,13 +7,16 @@ import { compare } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  // Temporarily disable adapter to test if it's causing the issue
+  // adapter: PrismaAdapter(prisma),
+  secret: process.env.AUTH_SECRET,
   session: {
     strategy: "jwt",
   },
   pages: {
     signIn: "/login",
   },
+  debug: process.env.NODE_ENV === "development",
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
