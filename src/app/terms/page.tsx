@@ -15,7 +15,7 @@ export default function TermsPage() {
         <section>
           <h2 className="mb-3 text-xl font-bold text-[#212121]">1. Introduction and Acceptance</h2>
           <p className="mb-3">
-            Welcome to our College Rental Platform ("Platform", "we", "us", or "our"). By accessing or using this Platform, you ("User", "you", or "your") agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, please do not use the Platform.
+            Welcome to our College Rental Platform (&quot;Platform&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;). By accessing or using this Platform, you (&quot;User&quot;, &quot;you&quot;, or &quot;your&quot;) agree to be bound by these Terms and Conditions (&quot;Terms&quot;). If you do not agree to these Terms, please do not use the Platform.
           </p>
           <h3 className="mb-2 font-semibold text-[#212121]">1.1 Platform Purpose</h3>
           <p className="mb-3">
@@ -57,7 +57,7 @@ export default function TermsPage() {
           <h2 className="mb-3 text-xl font-bold text-red-800">3. No Warranty or Guarantee of Product Condition</h2>
           <h3 className="mb-2 font-semibold text-red-800">3.1 As-Is Basis</h3>
           <p className="mb-3 font-bold text-red-800">
-            ALL ITEMS LISTED ON THE PLATFORM ARE PROVIDED "AS-IS" BY LENDERS.
+            ALL ITEMS LISTED ON THE PLATFORM ARE PROVIDED &quot;AS-IS&quot; BY LENDERS.
           </p>
           <p className="mb-2">The Platform makes <strong>NO WARRANTIES</strong>—express, implied, statutory, or otherwise—regarding:</p>
           <ul className="mb-3 ml-6 list-disc space-y-1">
