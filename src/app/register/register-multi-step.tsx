@@ -107,6 +107,8 @@ export default function RegisterMultiStep() {
     e.preventDefault();
     setError(null);
     
+    console.log("Step 2 submit started");
+    
     if (!collegeId) {
       setError("Please select your college");
       return;
@@ -135,6 +137,8 @@ export default function RegisterMultiStep() {
     setLoading(true);
 
     try {
+      console.log("Sending registration request...");
+      
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -152,12 +156,17 @@ export default function RegisterMultiStep() {
         }),
       });
 
+      console.log("Registration response status:", res.status);
+
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
+        console.error("Registration failed:", data);
         setError(data.error ?? "Registration failed");
         setLoading(false);
         return;
       }
+
+      console.log("Registration successful, signing in...");
 
       const result = await signIn("credentials", {
         email,
@@ -166,16 +175,20 @@ export default function RegisterMultiStep() {
         callbackUrl: "/select-role",
       });
 
+      console.log("Sign in result:", result);
+
       setLoading(false);
 
       if (result?.error) {
+        console.error("Sign in error:", result.error);
         router.push("/login");
       } else {
+        console.log("Redirecting to role selection...");
         router.push("/select-role");
       }
     } catch (err) {
-      console.error(err);
-      setError("Something went wrong");
+      console.error("Registration error:", err);
+      setError("Something went wrong: " + (err instanceof Error ? err.message : String(err)));
       setLoading(false);
     }
   }
@@ -381,10 +394,11 @@ export default function RegisterMultiStep() {
                   <input
                     id="aadhaarFirst4"
                     type="text"
-                    value={aadhaarNumber.slice(0, 4)}
+                    value={aadhaarNumber.slice(0, 4) || ''}
                     onChange={(e) => {
                       const value = e.target.value.replace(/\D/g, '').slice(0, 4);
-                      setAadhaarNumber(value + aadhaarNumber.slice(4));
+                      const last4 = aadhaarNumber.slice(4) || '';
+                      setAadhaarNumber(value + last4);
                     }}
                     required
                     maxLength={4}
@@ -399,10 +413,11 @@ export default function RegisterMultiStep() {
                   <input
                     id="aadhaarLast4"
                     type="text"
-                    value={aadhaarNumber.slice(4, 8)}
+                    value={aadhaarNumber.slice(4, 8) || ''}
                     onChange={(e) => {
                       const value = e.target.value.replace(/\D/g, '').slice(0, 4);
-                      setAadhaarNumber(aadhaarNumber.slice(0, 4) + value);
+                      const first4 = aadhaarNumber.slice(0, 4) || '';
+                      setAadhaarNumber(first4 + value);
                     }}
                     required
                     maxLength={4}
