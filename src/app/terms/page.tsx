@@ -82,7 +82,7 @@ export default function TermsPage() {
             Any issue relating to product condition, breakage, malfunction, non-return, theft, or loss is <strong>strictly a matter between the Lender and the Borrower</strong>.
           </p>
           <p className="mb-3">
-            The Platform's role is <strong>limited to connecting both parties</strong> and does NOT include handling, verifying, or safeguarding any items.
+            The Platform&apos;s role is <strong>limited to connecting both parties</strong> and does NOT include handling, verifying, or safeguarding any items.
           </p>
           <p className="font-semibold">
             ALL responsibility for item condition, safety, delivery, return, and dispute resolution rests solely with the Lender and Borrower.
