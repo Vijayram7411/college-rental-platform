@@ -92,7 +92,6 @@ export async function POST(request: Request) {
         images: JSON.stringify(images), // Store as JSON string for SQLite
         contactNumber,
         ownerId: user.id,
-        collegeId: user.collegeId,
         isActive: true,
       },
     });

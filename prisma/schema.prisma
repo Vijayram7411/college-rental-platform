@@ -8,20 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model College {
-  id                String         @id @default(cuid())
-  name              String
-  domain            String         @unique
-  isActive          Boolean        @default(true)
-  createdAt         DateTime       @default(now())
-  updatedAt         DateTime       @updatedAt
-  carts             Cart[]
-  ownerApplications OwnerProfile[]
-  products          Product[]
-  orders            RentalOrder[]
-  users             User[]
-}
-
 model User {
   id            String           @id @default(cuid())
   name          String?
@@ -36,9 +22,7 @@ model User {
   phone         String?
   aadhaarNumber String?  // Stores only first 4 and last 4 digits (8 digits total)
   personPhoto   String?
-
-  college       College?         @relation(fields: [collegeId], references: [id])
-  collegeId     String?
+  collegeName   String?  // Simple text field instead of foreign key
 
   ownerProfile  OwnerProfile?
   products      Product[]        @relation("OwnerProducts")
@@ -63,10 +47,8 @@ model OwnerProfile {
   phone       String?
   collegeName String?
   documentUrl String?
-  collegeId   String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  college     College? @relation(fields: [collegeId], references: [id])
   user        User     @relation(fields: [userId], references: [id])
 }
 
@@ -99,9 +81,6 @@ model Product {
   category     Category @relation(fields: [categoryId], references: [id])
   categoryId   String
 
-  college      College? @relation(fields: [collegeId], references: [id])
-  collegeId    String?
-
   cartItems    CartItem[]
   orderItems   RentalOrderItem[]
   reviews      Review[]
@@ -113,10 +92,8 @@ model Product {
 model Cart {
   id        String     @id @default(cuid())
   userId    String     @unique
-  collegeId String?
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  college   College?   @relation(fields: [collegeId], references: [id])
   user      User       @relation(fields: [userId], references: [id])
   items     CartItem[]
 }
@@ -142,11 +119,9 @@ model RentalOrder {
   totalAmount       Int
   startDate         DateTime?
   endDate           DateTime?
-  collegeId         String?
   shippingAddressId String?
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
-  college           College?          @relation(fields: [collegeId], references: [id])
   shipping          Address?          @relation(fields: [shippingAddressId], references: [id])
   user              User              @relation(fields: [userId], references: [id])
   items             RentalOrderItem[]

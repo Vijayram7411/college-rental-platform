@@ -33,22 +33,17 @@ export async function POST(request: Request) {
       });
 
       if (!existingProfile) {
-        const college = await prisma.college.findUnique({
-          where: { id: user.collegeId! },
-        });
-
         await prisma.ownerProfile.create({
           data: {
             userId: user.id,
             phone: user.phone || "",
-            collegeName: college?.name || "",
+            collegeName: user.collegeName || "",
             documentUrl: JSON.stringify({
               phone: user.phone,
               aadhaarNumber: user.aadhaarNumber,
               personPhoto: user.personPhoto,
             }),
             status: "APPROVED",
-            collegeId: user.collegeId!,
           },
         });
       }

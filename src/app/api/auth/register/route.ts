@@ -20,8 +20,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // College is now stored as name (text) instead of ID
-    // ID verification is temporarily disabled
+    // College is now stored as simple text field
+    // ID verification is disabled
     console.log("Registering user with college:", parsed.collegeId);
 
     const passwordHash = await hash(parsed.password, 10);
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
         name: parsed.name,
         email: parsed.email,
         passwordHash,
-        collegeId: null, // College name is stored but not linked to college table
+        collegeName: parsed.collegeId, // Store college name as text
         phone: parsed.phone,
         aadhaarNumber: parsed.aadhaarNumber,
         personPhoto: parsed.personPhoto,

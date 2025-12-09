@@ -5,13 +5,6 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Seeding demo products...");
 
-  // Get the first college
-  const college = await prisma.college.findFirst();
-  if (!college) {
-    console.error("❌ No college found. Please run seed-colleges.mjs first.");
-    return;
-  }
-
   // Get or create a demo user (lender)
   let demoUser = await prisma.user.findFirst({
     where: { email: "demo.lender@example.com" },
@@ -24,9 +17,7 @@ async function main() {
         email: "demo.lender@example.com",
         passwordHash: "$2a$10$YourHashedPasswordHere", // This won't be used for login
         role: "LENDER",
-        college: {
-          connect: { id: college.id },
-        },
+        collegeName: "Demo College",
       },
     });
     console.log("✅ Created demo lender user");
@@ -55,7 +46,6 @@ async function main() {
       contactNumber: "9876543210",
       isActive: true,
       ownerId: demoUser.id,
-      collegeId: college.id,
       rating: 4.8,
       ratingCount: 12,
     },
@@ -73,7 +63,6 @@ async function main() {
       contactNumber: "9876543210",
       isActive: true,
       ownerId: demoUser.id,
-      collegeId: college.id,
       rating: 4.5,
       ratingCount: 8,
     },
@@ -91,7 +80,6 @@ async function main() {
       contactNumber: "9876543210",
       isActive: true,
       ownerId: demoUser.id,
-      collegeId: college.id,
       rating: 4.7,
       ratingCount: 15,
     },
@@ -109,7 +97,6 @@ async function main() {
       contactNumber: "9876543210",
       isActive: true,
       ownerId: demoUser.id,
-      collegeId: college.id,
       rating: 4.6,
       ratingCount: 10,
     },
@@ -127,7 +114,6 @@ async function main() {
       contactNumber: "9876543210",
       isActive: true,
       ownerId: demoUser.id,
-      collegeId: college.id,
       rating: 4.9,
       ratingCount: 20,
     },

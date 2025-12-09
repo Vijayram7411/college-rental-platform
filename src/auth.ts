@@ -47,48 +47,33 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: user.email,
           image: user.image,
           role: user.role,
-          collegeId: user.collegeId,
+          collegeName: user.collegeName,
         };
       },
     }),
   ],
   callbacks: {
     async signIn({ user, account }) {
-      // For OAuth providers (Google), assign college based on email domain
+      // For OAuth providers (Google), extract college name from email domain
       if (account?.provider === "google" && user.email) {
         const emailDomain = user.email.split("@")[1]?.toLowerCase();
         
         if (emailDomain) {
-          // Find or create college
-          let college = await prisma.college.findUnique({
-            where: { domain: emailDomain },
-          });
+          const collegeName = emailDomain
+            .split(".")[0]
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
 
-          if (!college) {
-            const collegeName = emailDomain
-              .split(".")[0]
-              .split("-")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ");
-
-            college = await prisma.college.create({
-              data: {
-                name: collegeName,
-                domain: emailDomain,
-                isActive: true,
-              },
-            });
-          }
-
-          // Update user with collegeId if not set
+          // Update user with collegeName if not set
           const existingUser = await prisma.user.findUnique({
             where: { email: user.email },
           });
 
-          if (existingUser && !existingUser.collegeId) {
+          if (existingUser && !existingUser.collegeName) {
             await prisma.user.update({
               where: { id: existingUser.id },
-              data: { collegeId: college.id },
+              data: { collegeName },
             });
           }
         }
@@ -100,20 +85,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (user) {
         token.id = user.id;
         token.role = (user as any).role;
-        token.collegeId = (user as any).collegeId;
+        token.collegeName = (user as any).collegeName;
       }
       
       // Always fetch fresh user data from database to ensure role is up-to-date
       if (token.email) {
         const dbUser = await prisma.user.findUnique({
           where: { email: token.email },
-          select: { id: true, role: true, collegeId: true },
+          select: { id: true, role: true, collegeName: true },
         });
         
         if (dbUser) {
           token.id = dbUser.id;
           token.role = dbUser.role;
-          token.collegeId = dbUser.collegeId;
+          token.collegeName = dbUser.collegeName;
         }
       }
       
@@ -123,7 +108,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (session.user) {
         (session.user as any).id = token.id;
         (session.user as any).role = token.role;
-        (session.user as any).collegeId = token.collegeId;
+        (session.user as any).collegeName = token.collegeName;
       }
       return session;
     },
