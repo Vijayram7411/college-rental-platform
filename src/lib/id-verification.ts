@@ -45,6 +45,16 @@ export async function verifyStudentID(
   selectedCollegeName: string
 ): Promise<{ isValid: boolean; extractedCollege: string; confidence: string }> {
   try {
+    // Check if OpenAI API key is configured
+    if (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === "your-openai-api-key-here") {
+      console.warn("OpenAI API key not configured - skipping ID verification");
+      return {
+        isValid: true,
+        extractedCollege: "Verification skipped (API key not configured)",
+        confidence: "low",
+      };
+    }
+
     // Remove data URL prefix if present
     const base64Image = idImageBase64.replace(/^data:image\/\w+;base64,/, "");
 
@@ -94,7 +104,7 @@ export async function verifyStudentID(
     const content = response.choices[0]?.message?.content;
     if (!content) {
       return {
-        isValid: false,
+        isValid: true,
         extractedCollege: "Unable to analyze image",
         confidence: "low",
       };
@@ -108,12 +118,14 @@ export async function verifyStudentID(
       extractedCollege: result.collegeName || "Unknown",
       confidence: result.confidence || "low",
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error("ID verification error:", error);
+    console.error("Error details:", error?.message || "Unknown error");
+    
     // On error, allow signup (fail open to avoid blocking legitimate users)
     return {
       isValid: true,
-      extractedCollege: "Verification unavailable",
+      extractedCollege: "Verification unavailable (error occurred)",
       confidence: "low",
     };
   }

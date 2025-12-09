@@ -8,22 +8,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// SQLite doesn't support enums, using String instead
-
 model College {
-  id          String   @id @default(cuid())
-  name        String
-  domain      String   @unique
-  isActive    Boolean  @default(true)
-
-  users       User[]
-  products    Product[]
-  orders      RentalOrder[]
-  carts       Cart[]
+  id                String         @id @default(cuid())
+  name              String
+  domain            String         @unique
+  isActive          Boolean        @default(true)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  carts             Cart[]
   ownerApplications OwnerProfile[]
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  products          Product[]
+  orders            RentalOrder[]
+  users             User[]
 }
 
 model User {
@@ -61,29 +57,26 @@ model User {
 }
 
 model OwnerProfile {
-  id          String      @id @default(cuid())
-  user        User        @relation(fields: [userId], references: [id])
-  userId      String      @unique
-  status      String      @default("PENDING")
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  status      String   @default("PENDING")
   phone       String?
   collegeName String?
   documentUrl String?
-
-  college     College?    @relation(fields: [collegeId], references: [id])
   collegeId   String?
-
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  college     College? @relation(fields: [collegeId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 model Category {
   id        String    @id @default(cuid())
   name      String
   slug      String    @unique
-  products  Product[]
-
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  products  Product[]
 }
 
 model Product {
@@ -118,119 +111,97 @@ model Product {
 }
 
 model Cart {
-  id        String      @id @default(cuid())
-  user      User        @relation(fields: [userId], references: [id])
-  userId    String      @unique
-  items     CartItem[]
-
-  college   College?    @relation(fields: [collegeId], references: [id])
+  id        String     @id @default(cuid())
+  userId    String     @unique
   collegeId String?
-
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  college   College?   @relation(fields: [collegeId], references: [id])
+  user      User       @relation(fields: [userId], references: [id])
+  items     CartItem[]
 }
 
 model CartItem {
-  id                    String  @id @default(cuid())
-  cart                  Cart    @relation(fields: [cartId], references: [id])
+  id                    String   @id @default(cuid())
   cartId                String
-
-  product               Product @relation(fields: [productId], references: [id])
   productId             String
-
-  quantity              Int     @default(1)
-  durationMonths        Int     @default(1)
-
+  quantity              Int      @default(1)
+  durationMonths        Int      @default(1)
   pricePerMonth         Int
   originalPricePerMonth Int?
-
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
+  cart                  Cart     @relation(fields: [cartId], references: [id])
+  product               Product  @relation(fields: [productId], references: [id])
 }
 
 model RentalOrder {
-  id              String           @id @default(cuid())
-  user            User             @relation(fields: [userId], references: [id])
-  userId          String
-
-  status          String           @default("PENDING_PAYMENT")
-  totalAmount     Int
-  startDate       DateTime?
-  endDate         DateTime?
-
-  college         College?         @relation(fields: [collegeId], references: [id])
-  collegeId       String?
-
-  items           RentalOrderItem[]
-  shipping        Address?         @relation(fields: [shippingAddressId], references: [id])
+  id                String            @id @default(cuid())
+  userId            String
+  status            String            @default("PENDING_PAYMENT")
+  totalAmount       Int
+  startDate         DateTime?
+  endDate           DateTime?
+  collegeId         String?
   shippingAddressId String?
-
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  college           College?          @relation(fields: [collegeId], references: [id])
+  shipping          Address?          @relation(fields: [shippingAddressId], references: [id])
+  user              User              @relation(fields: [userId], references: [id])
+  items             RentalOrderItem[]
 }
 
 model RentalOrderItem {
-  id                    String       @id @default(cuid())
-  order                 RentalOrder  @relation(fields: [orderId], references: [id])
+  id                    String      @id @default(cuid())
   orderId               String
-
-  product               Product      @relation(fields: [productId], references: [id])
   productId             String
-
-  quantity              Int          @default(1)
-  durationMonths        Int          @default(1)
+  quantity              Int         @default(1)
+  durationMonths        Int         @default(1)
   pricePerMonth         Int
   originalPricePerMonth Int?
-
   startDate             DateTime?
   endDate               DateTime?
+  order                 RentalOrder @relation(fields: [orderId], references: [id])
+  product               Product     @relation(fields: [productId], references: [id])
 }
 
 model Address {
-  id          String   @id @default(cuid())
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String
-
-  line1       String
-  line2       String?
-  city        String
-  state       String
-  postalCode  String
-  country     String
-
-  isDefault   Boolean  @default(false)
-
+  id               String        @id @default(cuid())
+  userId           String
+  line1            String
+  line2            String?
+  city             String
+  state            String
+  postalCode       String
+  country          String
+  isDefault        Boolean       @default(false)
+  user             User          @relation(fields: [userId], references: [id])
   ordersAsShipping RentalOrder[]
 }
 
 model Review {
   id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id])
   userId    String
-
-  product   Product  @relation(fields: [productId], references: [id])
   productId String
-
   rating    Int
   comment   String?
-
   createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
   @@unique([userId, productId], name: "userId_productId")
 }
 
 model AdminActionLog {
-  id            String          @id @default(cuid())
-  admin         User            @relation("AdminActions", fields: [adminId], references: [id])
-  adminId       String
-
-  targetUser    User?           @relation("AdminTargetUser", fields: [targetUserId], references: [id])
-  targetUserId  String?
-
-  type          String
-  metadata      String?
-
-  createdAt     DateTime        @default(now())
+  id           String   @id @default(cuid())
+  adminId      String
+  targetUserId String?
+  type         String
+  metadata     String?
+  createdAt    DateTime @default(now())
+  admin        User     @relation("AdminActions", fields: [adminId], references: [id])
+  targetUser   User?    @relation("AdminTargetUser", fields: [targetUserId], references: [id])
 }
 
 model Account {
@@ -246,8 +217,7 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -257,8 +227,7 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
