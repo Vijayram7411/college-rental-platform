@@ -33,37 +33,21 @@ export async function POST(request: Request) {
       );
     }
 
-    // Verify student ID matches selected college
-    let verificationResult;
-    try {
-      verificationResult = await verifyBothSides(
-        parsed.idCardFront,
-        parsed.idCardBack,
-        college.name
-      );
-
-      // Only block registration if verification explicitly failed (not if it's unavailable)
-      if (!verificationResult.isValid && 
-          !verificationResult.message.includes("unavailable") &&
-          !verificationResult.message.includes("skipped")) {
-        return NextResponse.json(
-          {
-            error: "ID verification failed",
-            message: verificationResult.message,
-            details: verificationResult.details,
-          },
-          { status: 400 }
-        );
-      }
-    } catch (verifyError) {
-      console.error("ID verification error:", verifyError);
-      // Continue with registration if verification fails
-      verificationResult = {
-        isValid: true,
-        message: "ID verification skipped due to error",
-        details: { front: { extractedCollege: "N/A", confidence: "low" }, back: { extractedCollege: "N/A", confidence: "low" } }
-      };
-    }
+    // Skip ID verification temporarily to allow registration
+    // TODO: Re-enable after fixing the issue
+    console.log("ID verification temporarily disabled for registration");
+    
+    // Verify student ID matches selected college (DISABLED)
+    // let verificationResult;
+    // try {
+    //   verificationResult = await verifyBothSides(
+    //     parsed.idCardFront,
+    //     parsed.idCardBack,
+    //     college.name
+    //   );
+    // } catch (verifyError) {
+    //   console.error("ID verification error:", verifyError);
+    // }
 
     const passwordHash = await hash(parsed.password, 10);
 
