@@ -38,9 +38,24 @@ export default function RegisterMultiStep() {
 
   useEffect(() => {
     fetch("/api/colleges")
-      .then((res) => res.json())
-      .then((data) => setColleges(data))
-      .catch(() => setError("Failed to load colleges"));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch colleges");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setColleges(data);
+        } else {
+          console.error("Colleges data is not an array:", data);
+          setError("Failed to load colleges. Please refresh the page.");
+        }
+      })
+      .catch((err) => {
+        console.error("Error loading colleges:", err);
+        setError("Failed to load colleges. Please refresh the page.");
+      });
   }, []);
 
   async function convertToBase64(file: File): Promise<string> {

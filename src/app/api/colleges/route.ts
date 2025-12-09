@@ -5,12 +5,12 @@ export async function GET() {
   try {
     const colleges = await prisma.college.findMany({
       where: { isActive: true },
+      orderBy: { name: "asc" },
       select: {
         id: true,
         name: true,
         domain: true,
       },
-      orderBy: { name: "asc" },
     });
 
     return NextResponse.json(colleges);
