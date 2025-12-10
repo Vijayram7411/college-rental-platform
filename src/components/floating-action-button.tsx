@@ -21,7 +21,7 @@ export function FloatingActionButton() {
               onClick={() => setIsOpen(false)}
               className="flex items-center gap-3 rounded-full bg-white px-4 py-3 shadow-lg hover:shadow-xl transition-all group"
             >
-              <span className="text-sm font-medium text-neutral-700 whitespace-nowrap">
+              <span className="text-sm font-bold text-icici-navy-800 whitespace-nowrap">
                 List Item
               </span>
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-warning-500 text-white group-hover:bg-warning-600">
@@ -39,10 +39,10 @@ export function FloatingActionButton() {
               onClick={() => setIsOpen(false)}
               className="flex items-center gap-3 rounded-full bg-white px-4 py-3 shadow-lg hover:shadow-xl transition-all group"
             >
-              <span className="text-sm font-medium text-neutral-700 whitespace-nowrap">
+              <span className="text-sm font-bold text-icici-navy-800 whitespace-nowrap">
                 Browse Catalog
               </span>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-orange-500 text-white group-hover:bg-brand-orange-600">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-icici-orange-500 text-white group-hover:bg-icici-orange-600">
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -57,7 +57,7 @@ export function FloatingActionButton() {
               onClick={() => setIsOpen(false)}
               className="flex items-center gap-3 rounded-full bg-white px-4 py-3 shadow-lg hover:shadow-xl transition-all group"
             >
-              <span className="text-sm font-medium text-neutral-700 whitespace-nowrap">
+              <span className="text-sm font-bold text-icici-navy-800 whitespace-nowrap">
                 View Cart
               </span>
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success-500 text-white group-hover:bg-success-600">
@@ -73,10 +73,10 @@ export function FloatingActionButton() {
       {/* Main FAB Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-all hover:shadow-xl ${
+        className={`flex h-14 w-14 items-center justify-center rounded-full icici-shadow-lg transition-all hover:shadow-xl ${
           isOpen
-            ? "bg-neutral-700 rotate-45"
-            : "bg-brand-orange-500 hover:bg-brand-orange-600"
+            ? "bg-icici-navy-800 rotate-45"
+            : "icici-gradient-orange hover:shadow-xl"
         }`}
         aria-label="Quick actions"
         suppressHydrationWarning

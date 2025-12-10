@@ -22,51 +22,56 @@ export default async function Home() {
   return (
     <div className="flex flex-1 flex-col gap-4">
       {/* Hero Banner */}
-      <section className="flipkart-shadow overflow-hidden rounded-sm bg-white">
+      {/* ICICI-Inspired Hero Section */}
+      <section className="campus-card-elevated overflow-hidden">
         <div className="grid gap-0 md:grid-cols-2">
-          <div className="flex flex-col justify-center space-y-6 p-8 md:p-12">
-            <div className="inline-flex w-fit items-center gap-2 rounded-sm bg-[#ffe500] px-3 py-1 text-xs font-bold text-[#212121]">
+          <div className="flex flex-col justify-center space-y-8 p-8 md:p-12 bg-white">
+            <div className="campus-badge-orange w-fit">
               <span>⚡</span>
               <span>CAMPUS EXCLUSIVE</span>
             </div>
-            <h1 className="text-3xl font-bold text-[#212121] md:text-4xl">
+            <h1 className="text-4xl font-bold text-icici-navy-900 md:text-5xl leading-tight">
               Rent & Lend with Your College Community
             </h1>
-            <p className="text-base text-gray-600">
+            <p className="text-lg text-icici-navy-600 leading-relaxed">
               Find affordable rentals for books, electronics, and dorm essentials. 
               List your items and earn from classmates. Simple, secure, student-friendly.
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-4">
               <Link
                 href="/catalog"
-                className="inline-flex items-center gap-2 rounded-sm bg-[#ff9f00] px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#e68a00]"
+                className="campus-button-primary"
               >
                 Browse Catalog
               </Link>
               <Link
                 href="/owner/products/add"
-                className="inline-flex items-center gap-2 rounded-sm bg-brand-orange px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-brand-orange-dark transition-colors"
+                className="campus-button-secondary"
               >
                 List Your Items
               </Link>
             </div>
-            <div className="flex flex-wrap gap-6 text-sm">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">✓</span>
-                <span className="text-gray-700">No Hidden Fees</span>
+            <div className="flex flex-wrap gap-8 text-sm">
+              <div className="flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-icici-success-100">
+                  <span className="text-icici-success-600 font-bold">✓</span>
+                </div>
+                <span className="text-icici-navy-700 font-semibold">No Hidden Fees</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">✓</span>
-                <span className="text-gray-700">Student Budget Friendly</span>
+              <div className="flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-icici-success-100">
+                  <span className="text-icici-success-600 font-bold">✓</span>
+                </div>
+                <span className="text-icici-navy-700 font-semibold">Student Budget Friendly</span>
               </div>
             </div>
           </div>
-          <div className="bg-gradient-to-br from-[#2874f0] to-[#1c5bbf] p-8 md:p-12">
+          <div className="icici-gradient-orange p-8 md:p-12">
             <div className="flex h-full items-center justify-center">
               <div className="text-center text-white">
-                <div className="mb-4 text-6xl">🎓</div>
-                <h3 className="mb-2 text-2xl font-bold">Join Thousands of Students</h3>
-                <p className="text-sm opacity-90">Renting smarter, saving more</p>
+                <div className="mb-6 text-7xl">🎓</div>
+                <h3 className="mb-3 text-3xl font-bold">Join Thousands of Students</h3>
+                <p className="text-lg opacity-90 font-medium">Renting smarter, saving more</p>
               </div>
             </div>
           </div>

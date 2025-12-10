@@ -1,66 +1,98 @@
 @import "tailwindcss";
 
 :root {
-  /* Enhanced Campus Store Color System */
+  /* ICICI-Inspired Campus Store Design System */
   
-  /* Primary Orange Palette - Inspired by Swiggy + ICICI */
-  --brand-orange-50: #fff7ed;   /* Very light backgrounds */
-  --brand-orange-100: #ffedd5;  /* Light backgrounds, cards */
-  --brand-orange-200: #fed7aa;  /* Subtle highlights */
-  --brand-orange-300: #fdba74;  /* Borders, dividers */
-  --brand-orange-400: #fb923c;  /* Secondary buttons */
-  --brand-orange-500: #f97316;  /* Primary brand color */
-  --brand-orange-600: #ea580c;  /* Primary hover */
-  --brand-orange-700: #c2410c;  /* Active states */
-  --brand-orange-800: #9a3412;  /* Dark mode primary */
-  --brand-orange-900: #7c2d12;  /* Very dark accents */
+  /* ICICI Orange Palette - Professional Banking Orange */
+  --icici-orange-50: #fff8f1;   /* Ultra light backgrounds */
+  --icici-orange-100: #ffecdb;  /* Light section backgrounds */
+  --icici-orange-200: #ffd4b3;  /* Subtle highlights */
+  --icici-orange-300: #ffb380;  /* Borders, dividers */
+  --icici-orange-400: #ff8c4d;  /* Secondary elements */
+  --icici-orange-500: #F16A00;  /* ICICI Primary Orange */
+  --icici-orange-600: #d85a00;  /* Hover states */
+  --icici-orange-700: #bf4f00;  /* Active states */
+  --icici-orange-800: #a64400;  /* Dark variants */
+  --icici-orange-900: #8d3900;  /* Darkest orange */
   
-  /* Neutral Palette - Inspired by Airbnb */
-  --neutral-50: #fafaf9;        /* Page backgrounds */
-  --neutral-100: #f5f5f4;       /* Card backgrounds */
-  --neutral-200: #e7e5e4;       /* Borders */
-  --neutral-300: #d6d3d1;       /* Disabled states */
-  --neutral-400: #a8a29e;       /* Placeholder text */
-  --neutral-500: #78716c;       /* Secondary text */
-  --neutral-600: #57534e;       /* Primary text */
-  --neutral-700: #44403c;       /* Headings */
-  --neutral-800: #292524;       /* Dark headings */
-  --neutral-900: #1c1917;       /* Darkest text */
+  /* ICICI Navy Palette - Professional Deep Blues */
+  --icici-navy-50: #f8fafc;     /* Light backgrounds */
+  --icici-navy-100: #f1f5f9;    /* Card backgrounds */
+  --icici-navy-200: #e2e8f0;    /* Borders */
+  --icici-navy-300: #cbd5e1;    /* Disabled states */
+  --icici-navy-400: #94a3b8;    /* Placeholder text */
+  --icici-navy-500: #64748b;    /* Secondary text */
+  --icici-navy-600: #475569;    /* Primary text */
+  --icici-navy-700: #334155;    /* Headings */
+  --icici-navy-800: #1e293b;    /* Dark headings */
+  --icici-navy-900: #0f172a;    /* ICICI Navy Primary */
   
-  /* Semantic Colors */
-  --success-50: #f0fdf4;
-  --success-500: #22c55e;
-  --success-600: #16a34a;
+  /* ICICI Accent Colors */
+  --icici-success-50: #f0fdf4;
+  --icici-success-500: #10b981;  /* Banking green */
+  --icici-success-600: #059669;
   
-  --warning-50: #fffbeb;
-  --warning-500: #f59e0b;
-  --warning-600: #d97706;
+  --icici-warning-50: #fffbeb;
+  --icici-warning-500: #f59e0b;  /* Alert amber */
+  --icici-warning-600: #d97706;
   
-  --error-50: #fef2f2;
-  --error-500: #ef4444;
-  --error-600: #dc2626;
+  --icici-error-50: #fef2f2;
+  --icici-error-500: #ef4444;   /* Error red */
+  --icici-error-600: #dc2626;
   
-  --info-50: #eff6ff;
-  --info-500: #3b82f6;
-  --info-600: #2563eb;
+  --icici-info-50: #eff6ff;
+  --icici-info-500: #3b82f6;    /* Information blue */
+  --icici-info-600: #2563eb;
   
-  /* Main Variables */
-  --background: var(--neutral-50);
-  --foreground: var(--neutral-700);
-  --card-background: var(--neutral-100);
-  --border: var(--neutral-200);
+  /* Layout Variables */
+  --background: #ffffff;         /* Pure white like ICICI */
+  --foreground: var(--icici-navy-800);
+  --card-background: #ffffff;
+  --border: var(--icici-navy-200);
+  --section-background: var(--icici-navy-50);
   
   /* Brand Shortcuts */
-  --brand-orange: var(--brand-orange-500);
-  --brand-orange-dark: var(--brand-orange-600);
-  --brand-orange-light: var(--brand-orange-400);
-  --brand-cream: var(--brand-orange-50);
+  --brand-orange: var(--icici-orange-500);
+  --brand-orange-dark: var(--icici-orange-600);
+  --brand-orange-light: var(--icici-orange-400);
+  --brand-navy: var(--icici-navy-900);
+  --brand-navy-light: var(--icici-navy-700);
   
-  /* Legacy mappings */
-  --flipkart-blue: var(--brand-orange-500);
-  --flipkart-blue-dark: var(--brand-orange-600);
-  --flipkart-yellow: var(--warning-500);
-  --flipkart-green: var(--success-500);
+  /* Legacy mappings for gradual migration */
+  --brand-orange-50: var(--icici-orange-50);
+  --brand-orange-100: var(--icici-orange-100);
+  --brand-orange-200: var(--icici-orange-200);
+  --brand-orange-300: var(--icici-orange-300);
+  --brand-orange-400: var(--icici-orange-400);
+  --brand-orange-500: var(--icici-orange-500);
+  --brand-orange-600: var(--icici-orange-600);
+  --brand-orange-700: var(--icici-orange-700);
+  --brand-orange-800: var(--icici-orange-800);
+  --brand-orange-900: var(--icici-orange-900);
+  
+  --neutral-50: var(--icici-navy-50);
+  --neutral-100: var(--icici-navy-100);
+  --neutral-200: var(--icici-navy-200);
+  --neutral-300: var(--icici-navy-300);
+  --neutral-400: var(--icici-navy-400);
+  --neutral-500: var(--icici-navy-500);
+  --neutral-600: var(--icici-navy-600);
+  --neutral-700: var(--icici-navy-700);
+  --neutral-800: var(--icici-navy-800);
+  --neutral-900: var(--icici-navy-900);
+  
+  --success-50: var(--icici-success-50);
+  --success-500: var(--icici-success-500);
+  --success-600: var(--icici-success-600);
+  --warning-50: var(--icici-warning-50);
+  --warning-500: var(--icici-warning-500);
+  --warning-600: var(--icici-warning-600);
+  --error-50: var(--icici-error-50);
+  --error-500: var(--icici-error-500);
+  --error-600: var(--icici-error-600);
+  --info-50: var(--icici-info-50);
+  --info-500: var(--icici-info-500);
+  --info-600: var(--icici-info-600);
 }
 
 @theme inline {
@@ -202,61 +234,100 @@ html {
   }
 }
 
-/* Enhanced Campus Store Component Styles */
+/* ICICI-Inspired Campus Store Component Styles */
 
-/* Form Inputs - Inspired by modern design systems */
+/* Form Inputs - ICICI Banking Style */
 .campus-input {
-  @apply w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-sm text-neutral-700 placeholder-neutral-400 outline-none transition-all duration-200 focus:border-brand-orange-500 focus:ring-2 focus:ring-brand-orange-100 hover:border-neutral-400;
+  @apply w-full rounded-md border-2 border-icici-navy-200 bg-white px-4 py-3 text-sm text-icici-navy-800 placeholder-icici-navy-400 outline-none transition-all duration-200 focus:border-icici-orange-500 focus:ring-2 focus:ring-icici-orange-100 hover:border-icici-navy-300;
 }
 
 .campus-input:disabled {
-  @apply bg-neutral-100 text-neutral-400 cursor-not-allowed;
+  @apply bg-icici-navy-50 text-icici-navy-400 cursor-not-allowed border-icici-navy-200;
 }
 
-/* Primary Buttons - Gradient approach like Swiggy */
+/* Primary Buttons - ICICI Orange Solid */
 .campus-button-primary {
-  @apply relative overflow-hidden rounded-lg bg-gradient-to-r from-brand-orange-500 to-brand-orange-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:from-brand-orange-600 hover:to-brand-orange-700 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 focus:ring-2 focus:ring-brand-orange-200 focus:ring-offset-2;
+  @apply relative overflow-hidden rounded-md bg-icici-orange-500 px-8 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-icici-orange-600 hover:shadow-lg focus:ring-2 focus:ring-icici-orange-200 focus:ring-offset-2 active:bg-icici-orange-700;
 }
 
-/* Secondary Buttons - Clean approach like Airbnb */
+/* Secondary Buttons - Navy Outline */
 .campus-button-secondary {
-  @apply rounded-lg border-2 border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-neutral-700 transition-all duration-200 hover:border-brand-orange-400 hover:text-brand-orange-600 hover:bg-brand-orange-50 focus:ring-2 focus:ring-brand-orange-200 focus:ring-offset-2;
+  @apply rounded-md border-2 border-icici-navy-300 bg-white px-8 py-3 text-sm font-bold text-icici-navy-700 transition-all duration-200 hover:border-icici-orange-500 hover:text-icici-orange-600 hover:bg-icici-orange-50 focus:ring-2 focus:ring-icici-orange-200 focus:ring-offset-2;
 }
 
-/* Tertiary Buttons - Minimal approach */
+/* Tertiary Buttons - Text Only */
 .campus-button-tertiary {
-  @apply rounded-lg px-4 py-2 text-sm font-medium text-brand-orange-600 transition-all duration-200 hover:bg-brand-orange-50 hover:text-brand-orange-700 focus:ring-2 focus:ring-brand-orange-200 focus:ring-offset-2;
+  @apply rounded-md px-6 py-2 text-sm font-semibold text-icici-orange-600 transition-all duration-200 hover:bg-icici-orange-50 hover:text-icici-orange-700 focus:ring-2 focus:ring-icici-orange-200 focus:ring-offset-2;
 }
 
-/* Card Styles - Inspired by modern marketplaces */
+/* Navy Buttons - Professional Dark */
+.campus-button-navy {
+  @apply rounded-md bg-icici-navy-900 px-8 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-icici-navy-800 hover:shadow-lg focus:ring-2 focus:ring-icici-navy-300 focus:ring-offset-2;
+}
+
+/* Card Styles - ICICI Clean Design */
 .campus-card {
-  @apply rounded-xl bg-white border border-neutral-200 shadow-sm transition-all duration-200 hover:shadow-md hover:border-neutral-300;
+  @apply rounded-lg bg-white border border-icici-navy-200 shadow-sm transition-all duration-200 hover:shadow-md hover:border-icici-navy-300;
 }
 
 .campus-card-elevated {
-  @apply rounded-xl bg-white shadow-lg border border-neutral-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  @apply rounded-lg bg-white shadow-md border border-icici-navy-200 transition-all duration-300 hover:shadow-lg;
 }
 
-/* Status Badges */
+.campus-card-featured {
+  @apply rounded-lg bg-white shadow-lg border-2 border-icici-orange-200 transition-all duration-300 hover:shadow-xl hover:border-icici-orange-300;
+}
+
+/* Section Backgrounds - ICICI Style */
+.campus-section-light {
+  @apply bg-icici-navy-50 border-y border-icici-navy-100;
+}
+
+.campus-section-orange {
+  @apply bg-gradient-to-r from-icici-orange-50 to-icici-orange-100 border-y border-icici-orange-200;
+}
+
+.campus-section-navy {
+  @apply bg-icici-navy-900 text-white;
+}
+
+/* Status Badges - Banking Style */
 .campus-badge-success {
-  @apply inline-flex items-center rounded-full bg-success-50 px-3 py-1 text-xs font-medium text-success-600;
+  @apply inline-flex items-center rounded-md bg-icici-success-50 px-3 py-1 text-xs font-bold text-icici-success-600 border border-icici-success-200;
 }
 
 .campus-badge-warning {
-  @apply inline-flex items-center rounded-full bg-warning-50 px-3 py-1 text-xs font-medium text-warning-600;
+  @apply inline-flex items-center rounded-md bg-icici-warning-50 px-3 py-1 text-xs font-bold text-icici-warning-600 border border-icici-warning-200;
 }
 
 .campus-badge-error {
-  @apply inline-flex items-center rounded-full bg-error-50 px-3 py-1 text-xs font-medium text-error-600;
+  @apply inline-flex items-center rounded-md bg-icici-error-50 px-3 py-1 text-xs font-bold text-icici-error-600 border border-icici-error-200;
 }
 
 .campus-badge-info {
-  @apply inline-flex items-center rounded-full bg-info-50 px-3 py-1 text-xs font-medium text-info-600;
+  @apply inline-flex items-center rounded-md bg-icici-info-50 px-3 py-1 text-xs font-bold text-icici-info-600 border border-icici-info-200;
 }
 
-/* Enhanced Shadows - Depth like premium platforms */
-.campus-shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
-.campus-shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
-.campus-shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-.campus-shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-.campus-shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+.campus-badge-orange {
+  @apply inline-flex items-center rounded-md bg-icici-orange-100 px-3 py-1 text-xs font-bold text-icici-orange-700 border border-icici-orange-300;
+}
+
+/* ICICI-Style Shadows */
+.icici-shadow-sm { box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.08); }
+.icici-shadow { box-shadow: 0 2px 6px 0 rgba(15, 23, 42, 0.12); }
+.icici-shadow-md { box-shadow: 0 4px 12px 0 rgba(15, 23, 42, 0.15); }
+.icici-shadow-lg { box-shadow: 0 8px 24px 0 rgba(15, 23, 42, 0.18); }
+.icici-shadow-xl { box-shadow: 0 16px 48px 0 rgba(15, 23, 42, 0.20); }
+
+/* Professional Gradients */
+.icici-gradient-orange {
+  background: linear-gradient(135deg, #F16A00 0%, #d85a00 100%);
+}
+
+.icici-gradient-navy {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.icici-gradient-subtle {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}

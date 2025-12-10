@@ -31,9 +31,9 @@ export function ProductCard({ product }: ProductCardProps) {
   const hasValidImage = thumbnail && !imageError;
 
   return (
-    <div className="campus-card-elevated flex flex-col overflow-hidden group cursor-pointer">
+    <div className="campus-card flex flex-col overflow-hidden group cursor-pointer">
       {/* Image Section */}
-      <div className="relative aspect-square w-full bg-gradient-to-br from-neutral-100 to-neutral-200 overflow-hidden">
+      <div className="relative aspect-square w-full bg-gradient-to-br from-icici-navy-50 to-icici-navy-100 overflow-hidden">
         {hasValidImage ? (
           <img
             src={thumbnail}
@@ -45,14 +45,14 @@ export function ProductCard({ product }: ProductCardProps) {
         ) : (
           <div className="flex h-full flex-col items-center justify-center gap-2 p-4 text-center">
             <span className="text-6xl">📦</span>
-            <span className="text-xs text-neutral-500">No image available</span>
+            <span className="text-xs text-icici-navy-500 font-medium">No image available</span>
           </div>
         )}
       </div>
 
       {/* Product Info */}
       <div className="space-y-2 p-4">
-        <h3 className="line-clamp-2 text-sm font-semibold text-neutral-800 group-hover:text-brand-orange-600 transition-colors duration-200">
+        <h3 className="line-clamp-2 text-sm font-bold text-icici-navy-800 group-hover:text-icici-orange-600 transition-colors duration-200">
           {product.title}
         </h3>
         
@@ -70,17 +70,17 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Price */}
         <div className="flex items-baseline gap-2">
-          <span className="text-lg font-bold text-neutral-900">
+          <span className="text-lg font-bold text-icici-navy-900">
             ₹{product.basePricePerMonth}
           </span>
-          <span className="text-xs text-neutral-500 font-medium">/day</span>
+          <span className="text-xs text-icici-navy-500 font-semibold">/day</span>
         </div>
 
         {/* Discount */}
         {product.originalPricePerMonth &&
           product.originalPricePerMonth > product.basePricePerMonth && (
             <div className="flex items-center gap-2">
-              <span className="text-xs text-neutral-400 line-through">
+              <span className="text-xs text-icici-navy-400 line-through font-medium">
                 ₹{product.originalPricePerMonth}
               </span>
               <span className="campus-badge-success">
