@@ -1,41 +1,124 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f1f3f6;
-  --foreground: #212121;
+  /* Enhanced Campus Store Color System */
   
-  /* Campus Store Brand Colors - Based on your orange logo */
-  --brand-orange: #ff6b35;
-  --brand-orange-dark: #e55a2b;
-  --brand-orange-light: #ff8c5a;
-  --brand-cream: #f5f1eb;
-  --brand-yellow: #ffe500;
-  --brand-green: #388e3c;
+  /* Primary Orange Palette - Inspired by Swiggy + ICICI */
+  --brand-orange-50: #fff7ed;   /* Very light backgrounds */
+  --brand-orange-100: #ffedd5;  /* Light backgrounds, cards */
+  --brand-orange-200: #fed7aa;  /* Subtle highlights */
+  --brand-orange-300: #fdba74;  /* Borders, dividers */
+  --brand-orange-400: #fb923c;  /* Secondary buttons */
+  --brand-orange-500: #f97316;  /* Primary brand color */
+  --brand-orange-600: #ea580c;  /* Primary hover */
+  --brand-orange-700: #c2410c;  /* Active states */
+  --brand-orange-800: #9a3412;  /* Dark mode primary */
+  --brand-orange-900: #7c2d12;  /* Very dark accents */
   
-  /* Legacy colors for gradual migration */
-  --flipkart-blue: #ff6b35;
-  --flipkart-blue-dark: #e55a2b;
-  --flipkart-yellow: #ffe500;
-  --flipkart-green: #388e3c;
+  /* Neutral Palette - Inspired by Airbnb */
+  --neutral-50: #fafaf9;        /* Page backgrounds */
+  --neutral-100: #f5f5f4;       /* Card backgrounds */
+  --neutral-200: #e7e5e4;       /* Borders */
+  --neutral-300: #d6d3d1;       /* Disabled states */
+  --neutral-400: #a8a29e;       /* Placeholder text */
+  --neutral-500: #78716c;       /* Secondary text */
+  --neutral-600: #57534e;       /* Primary text */
+  --neutral-700: #44403c;       /* Headings */
+  --neutral-800: #292524;       /* Dark headings */
+  --neutral-900: #1c1917;       /* Darkest text */
+  
+  /* Semantic Colors */
+  --success-50: #f0fdf4;
+  --success-500: #22c55e;
+  --success-600: #16a34a;
+  
+  --warning-50: #fffbeb;
+  --warning-500: #f59e0b;
+  --warning-600: #d97706;
+  
+  --error-50: #fef2f2;
+  --error-500: #ef4444;
+  --error-600: #dc2626;
+  
+  --info-50: #eff6ff;
+  --info-500: #3b82f6;
+  --info-600: #2563eb;
+  
+  /* Main Variables */
+  --background: var(--neutral-50);
+  --foreground: var(--neutral-700);
+  --card-background: var(--neutral-100);
+  --border: var(--neutral-200);
+  
+  /* Brand Shortcuts */
+  --brand-orange: var(--brand-orange-500);
+  --brand-orange-dark: var(--brand-orange-600);
+  --brand-orange-light: var(--brand-orange-400);
+  --brand-cream: var(--brand-orange-50);
+  
+  /* Legacy mappings */
+  --flipkart-blue: var(--brand-orange-500);
+  --flipkart-blue-dark: var(--brand-orange-600);
+  --flipkart-yellow: var(--warning-500);
+  --flipkart-green: var(--success-500);
 }
 
 @theme inline {
+  /* Layout & Typography */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card-background: var(--card-background);
+  --color-border: var(--border);
   
-  /* Campus Store Brand Colors */
+  /* Brand Orange Scale */
+  --color-brand-orange-50: var(--brand-orange-50);
+  --color-brand-orange-100: var(--brand-orange-100);
+  --color-brand-orange-200: var(--brand-orange-200);
+  --color-brand-orange-300: var(--brand-orange-300);
+  --color-brand-orange-400: var(--brand-orange-400);
+  --color-brand-orange-500: var(--brand-orange-500);
+  --color-brand-orange-600: var(--brand-orange-600);
+  --color-brand-orange-700: var(--brand-orange-700);
+  --color-brand-orange-800: var(--brand-orange-800);
+  --color-brand-orange-900: var(--brand-orange-900);
+  
+  /* Neutral Scale */
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  
+  /* Semantic Colors */
+  --color-success-50: var(--success-50);
+  --color-success-500: var(--success-500);
+  --color-success-600: var(--success-600);
+  --color-warning-50: var(--warning-50);
+  --color-warning-500: var(--warning-500);
+  --color-warning-600: var(--warning-600);
+  --color-error-50: var(--error-50);
+  --color-error-500: var(--error-500);
+  --color-error-600: var(--error-600);
+  --color-info-50: var(--info-50);
+  --color-info-500: var(--info-500);
+  --color-info-600: var(--info-600);
+  
+  /* Brand Shortcuts */
   --color-brand-orange: var(--brand-orange);
   --color-brand-orange-dark: var(--brand-orange-dark);
   --color-brand-orange-light: var(--brand-orange-light);
   --color-brand-cream: var(--brand-cream);
-  --color-brand-yellow: var(--brand-yellow);
-  --color-brand-green: var(--brand-green);
   
-  /* Legacy color mappings for existing components */
+  /* Legacy mappings */
   --color-flipkart-blue: var(--brand-orange);
   --color-flipkart-blue-dark: var(--brand-orange-dark);
-  --color-flipkart-yellow: var(--brand-yellow);
-  --color-flipkart-green: var(--brand-green);
+  --color-flipkart-yellow: var(--warning-500);
+  --color-flipkart-green: var(--success-500);
   
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -119,15 +202,61 @@ html {
   }
 }
 
-/* Campus Store form input styles */
+/* Enhanced Campus Store Component Styles */
+
+/* Form Inputs - Inspired by modern design systems */
 .campus-input {
-  @apply w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange transition-colors;
+  @apply w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-sm text-neutral-700 placeholder-neutral-400 outline-none transition-all duration-200 focus:border-brand-orange-500 focus:ring-2 focus:ring-brand-orange-100 hover:border-neutral-400;
 }
 
+.campus-input:disabled {
+  @apply bg-neutral-100 text-neutral-400 cursor-not-allowed;
+}
+
+/* Primary Buttons - Gradient approach like Swiggy */
 .campus-button-primary {
-  @apply rounded-sm bg-brand-orange px-4 py-3 text-sm font-bold text-white shadow-md hover:bg-brand-orange-dark transition-colors;
+  @apply relative overflow-hidden rounded-lg bg-gradient-to-r from-brand-orange-500 to-brand-orange-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:from-brand-orange-600 hover:to-brand-orange-700 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 focus:ring-2 focus:ring-brand-orange-200 focus:ring-offset-2;
 }
 
+/* Secondary Buttons - Clean approach like Airbnb */
 .campus-button-secondary {
-  @apply rounded-sm border-2 border-gray-300 px-4 py-3 text-sm font-bold text-foreground hover:border-brand-orange transition-colors;
+  @apply rounded-lg border-2 border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-neutral-700 transition-all duration-200 hover:border-brand-orange-400 hover:text-brand-orange-600 hover:bg-brand-orange-50 focus:ring-2 focus:ring-brand-orange-200 focus:ring-offset-2;
 }
+
+/* Tertiary Buttons - Minimal approach */
+.campus-button-tertiary {
+  @apply rounded-lg px-4 py-2 text-sm font-medium text-brand-orange-600 transition-all duration-200 hover:bg-brand-orange-50 hover:text-brand-orange-700 focus:ring-2 focus:ring-brand-orange-200 focus:ring-offset-2;
+}
+
+/* Card Styles - Inspired by modern marketplaces */
+.campus-card {
+  @apply rounded-xl bg-white border border-neutral-200 shadow-sm transition-all duration-200 hover:shadow-md hover:border-neutral-300;
+}
+
+.campus-card-elevated {
+  @apply rounded-xl bg-white shadow-lg border border-neutral-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+/* Status Badges */
+.campus-badge-success {
+  @apply inline-flex items-center rounded-full bg-success-50 px-3 py-1 text-xs font-medium text-success-600;
+}
+
+.campus-badge-warning {
+  @apply inline-flex items-center rounded-full bg-warning-50 px-3 py-1 text-xs font-medium text-warning-600;
+}
+
+.campus-badge-error {
+  @apply inline-flex items-center rounded-full bg-error-50 px-3 py-1 text-xs font-medium text-error-600;
+}
+
+.campus-badge-info {
+  @apply inline-flex items-center rounded-full bg-info-50 px-3 py-1 text-xs font-medium text-info-600;
+}
+
+/* Enhanced Shadows - Depth like premium platforms */
+.campus-shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+.campus-shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
+.campus-shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.campus-shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+.campus-shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }

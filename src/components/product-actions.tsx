@@ -48,14 +48,14 @@ export function ProductActions({ productId, productTitle, showEditButton = true 
         <div className="mt-2 flex gap-2">
           <Link
             href={`/owner/products/${productId}/edit`}
-            className="flex-1 rounded-sm bg-brand-orange px-4 py-2 text-center text-sm font-semibold text-white hover:bg-brand-orange-dark transition-colors"
+            className="campus-button-primary flex-1 text-center"
           >
             ✏️ Edit
           </Link>
           <button
             onClick={() => setShowConfirm(true)}
             disabled={deleting}
-            className="flex-1 rounded-sm bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-red-700 transition-colors"
+            className="flex-1 rounded-lg bg-gradient-to-r from-error-500 to-error-600 px-6 py-3 text-center text-sm font-semibold text-white hover:from-error-600 hover:to-error-700 transition-all duration-200 shadow-lg hover:shadow-xl"
           >
             🗑️ Delete
           </button>
@@ -65,7 +65,7 @@ export function ProductActions({ productId, productTitle, showEditButton = true 
           <button
             onClick={() => setShowConfirm(true)}
             disabled={deleting}
-            className="w-full rounded-sm bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60"
+            className="w-full rounded-lg bg-gradient-to-r from-error-500 to-error-600 px-6 py-3 text-center text-sm font-semibold text-white hover:from-error-600 hover:to-error-700 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-60"
           >
             🗑️ Delete
           </button>
@@ -73,7 +73,7 @@ export function ProductActions({ productId, productTitle, showEditButton = true 
       )}
 
       {error && (
-        <div className="mt-2 rounded-sm bg-red-50 p-2 text-xs text-red-600">
+        <div className="mt-2 rounded-lg bg-error-50 p-3 text-xs text-error-600 border border-error-200">
           {error}
         </div>
       )}
@@ -81,9 +81,9 @@ export function ProductActions({ productId, productTitle, showEditButton = true 
       {/* Confirmation Modal */}
       {showConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="w-full max-w-md rounded-sm bg-white p-6 shadow-xl">
+          <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-2xl border border-neutral-200">
             <div className="mb-4 text-center text-4xl">⚠️</div>
-            <h3 className="mb-2 text-center text-lg font-bold text-foreground">
+            <h3 className="mb-2 text-center text-lg font-bold text-neutral-800">
               Delete Product?
             </h3>
             <p className="mb-4 text-center text-sm text-gray-600">
@@ -92,7 +92,7 @@ export function ProductActions({ productId, productTitle, showEditButton = true 
             </p>
             
             {error && (
-              <div className="mb-4 rounded-sm bg-red-50 p-3 text-sm text-red-600">
+              <div className="mb-4 rounded-lg bg-error-50 p-4 text-sm text-error-600 border border-error-200">
                 {error}
               </div>
             )}
@@ -104,7 +104,7 @@ export function ProductActions({ productId, productTitle, showEditButton = true 
                   setError(null);
                 }}
                 disabled={deleting}
-                className="flex-1 rounded-sm border-2 border-gray-300 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-orange disabled:opacity-60 transition-colors"
+                className="campus-button-secondary flex-1 disabled:opacity-60"
               >
                 Cancel
               </button>

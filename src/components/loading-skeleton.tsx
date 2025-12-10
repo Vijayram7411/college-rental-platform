@@ -2,14 +2,14 @@
 
 export function ProductCardSkeleton() {
   return (
-    <div className="flipkart-shadow animate-pulse rounded-sm bg-white overflow-hidden">
-      <div className="aspect-square bg-gray-200" />
+    <div className="campus-card animate-pulse overflow-hidden">
+      <div className="aspect-square bg-neutral-200" />
       <div className="p-4 space-y-3">
-        <div className="h-4 bg-gray-200 rounded w-3/4" />
-        <div className="h-3 bg-gray-200 rounded w-1/2" />
+        <div className="h-4 bg-neutral-200 rounded-lg w-3/4" />
+        <div className="h-3 bg-neutral-200 rounded-lg w-1/2" />
         <div className="flex items-center justify-between">
-          <div className="h-5 bg-gray-200 rounded w-20" />
-          <div className="h-4 bg-gray-200 rounded w-16" />
+          <div className="h-5 bg-neutral-200 rounded-lg w-20" />
+          <div className="h-4 bg-neutral-200 rounded-lg w-16" />
         </div>
       </div>
     </div>

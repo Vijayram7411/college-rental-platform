@@ -16,8 +16,8 @@ function NavLink({ href, label, onClick }: { href: string; label: string; onClic
       onClick={onClick}
       className={`px-4 py-2 text-sm font-medium transition-colors ${
         active
-          ? "text-white border-b-2 border-white bg-white/10 rounded-t-sm"
-          : "text-white/90 hover:text-white hover:bg-white/10 rounded-sm"
+          ? "text-white border-b-2 border-white bg-white/15 rounded-t-lg backdrop-blur-sm"
+          : "text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
       }`}
     >
       {label}
@@ -110,17 +110,17 @@ export function MainHeader() {
   }, [router, session, role]);
 
   return (
-    <header className="sticky top-0 z-30 bg-gradient-to-r from-brand-orange to-brand-orange-dark shadow-md">
+    <header className="sticky top-0 z-30 bg-gradient-to-r from-brand-orange-500 via-brand-orange-600 to-brand-orange-700 shadow-lg backdrop-blur-sm border-b border-brand-orange-400/20">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-3">
-            {/* Logo Icon - Shopping bag with graduation cap */}
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm">
+            {/* Enhanced Logo Design */}
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 backdrop-blur-sm border border-white/20 shadow-lg">
               <span className="text-2xl">🎓</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-white">Campus Store</span>
-              <span className="text-[10px] text-[#ffe500]">College <span className="font-semibold">Rentals</span> 🛍️</span>
+              <span className="text-xl font-bold text-white tracking-tight">Campus Store</span>
+              <span className="text-[10px] text-warning-300 font-medium">College <span className="font-bold">Rentals</span> 🛍️</span>
             </div>
           </Link>
           {/* Desktop Navigation */}
@@ -180,7 +180,7 @@ export function MainHeader() {
               <div className="flex items-center gap-3">
                 <Link
                   href="/login"
-                  className="rounded-sm bg-white px-8 py-1.5 text-sm font-medium text-brand-orange hover:bg-gray-100 transition-colors"
+                  className="rounded-lg bg-white px-8 py-2 text-sm font-semibold text-brand-orange-600 hover:bg-neutral-50 hover:text-brand-orange-700 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   Login
                 </Link>
@@ -203,7 +203,7 @@ export function MainHeader() {
                 )}
                 
                 <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold text-brand-orange">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-brand-orange-600 shadow-md border-2 border-white/50">
                     {user?.name?.[0]?.toUpperCase() ?? "U"}
                   </div>
                   <div className="flex flex-col">

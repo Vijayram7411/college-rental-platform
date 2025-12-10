@@ -31,9 +31,9 @@ export function ProductCard({ product }: ProductCardProps) {
   const hasValidImage = thumbnail && !imageError;
 
   return (
-    <div className="flipkart-shadow-hover flex flex-col overflow-hidden rounded-sm bg-white transition-all">
+    <div className="campus-card-elevated flex flex-col overflow-hidden group cursor-pointer">
       {/* Image Section */}
-      <div className="relative aspect-square w-full bg-gradient-to-br from-gray-100 to-gray-200">
+      <div className="relative aspect-square w-full bg-gradient-to-br from-neutral-100 to-neutral-200 overflow-hidden">
         {hasValidImage ? (
           <img
             src={thumbnail}
@@ -45,24 +45,24 @@ export function ProductCard({ product }: ProductCardProps) {
         ) : (
           <div className="flex h-full flex-col items-center justify-center gap-2 p-4 text-center">
             <span className="text-6xl">📦</span>
-            <span className="text-xs text-gray-500">No image available</span>
+            <span className="text-xs text-neutral-500">No image available</span>
           </div>
         )}
       </div>
 
       {/* Product Info */}
       <div className="space-y-2 p-4">
-        <h3 className="line-clamp-2 text-sm font-semibold text-foreground">
+        <h3 className="line-clamp-2 text-sm font-semibold text-neutral-800 group-hover:text-brand-orange-600 transition-colors duration-200">
           {product.title}
         </h3>
         
         {/* Category and Status */}
         <div className="flex items-center gap-2">
-          <span className="rounded-sm bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700">
+          <span className="campus-badge-info">
             {product.category?.name ?? "Other"}
           </span>
           {!product.isActive && (
-            <span className="rounded-sm bg-red-100 px-2 py-1 text-xs font-medium text-red-600">
+            <span className="campus-badge-error">
               Inactive
             </span>
           )}
@@ -70,20 +70,20 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Price */}
         <div className="flex items-baseline gap-2">
-          <span className="text-lg font-bold text-foreground">
+          <span className="text-lg font-bold text-neutral-900">
             ₹{product.basePricePerMonth}
           </span>
-          <span className="text-xs text-gray-600">/day</span>
+          <span className="text-xs text-neutral-500 font-medium">/day</span>
         </div>
 
         {/* Discount */}
         {product.originalPricePerMonth &&
           product.originalPricePerMonth > product.basePricePerMonth && (
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500 line-through">
+              <span className="text-xs text-neutral-400 line-through">
                 ₹{product.originalPricePerMonth}
               </span>
-              <span className="rounded-sm bg-brand-green px-2 py-0.5 text-xs font-semibold text-white">
+              <span className="campus-badge-success">
                 {Math.round(
                   ((product.originalPricePerMonth - product.basePricePerMonth) /
                     product.originalPricePerMonth) *
