@@ -84,7 +84,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                 onClick={() => setCurrentImageIndex(index)}
                 className={`h-20 w-20 flex-shrink-0 overflow-hidden rounded-sm border-2 transition-all ${
                   currentImageIndex === index
-                    ? "border-[#2874f0]"
+                    ? "border-brand-orange"
                     : "border-gray-300 hover:border-gray-400"
                 }`}
               >
@@ -193,7 +193,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
           <AddToCartForm productId={product.id} />
           <Link
             href="/cart"
-            className="mt-3 block rounded-sm border-2 border-gray-300 px-4 py-2 text-center text-sm font-bold text-[#212121] hover:border-[#2874f0]"
+            className="mt-3 block rounded-sm border-2 border-gray-300 px-4 py-2 text-center text-sm font-bold text-foreground hover:border-brand-orange transition-colors"
           >
             View Cart
           </Link>

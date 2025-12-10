@@ -37,7 +37,7 @@ export default function SelectRolePage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#2874f0] to-[#1c5bbf] px-4 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-brand-orange to-brand-orange-dark px-4 py-12">
       <div className="w-full max-w-4xl">
         <div className="mb-8 text-center">
           <h1 className="mb-2 text-4xl font-bold text-white">
@@ -103,10 +103,10 @@ export default function SelectRolePage() {
             disabled={loading}
             className="group relative overflow-hidden rounded-lg bg-white p-8 shadow-xl transition-all hover:scale-105 hover:shadow-2xl disabled:opacity-60"
           >
-            <div className="absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-[#2874f0]/10 transition-transform group-hover:scale-150"></div>
+            <div className="absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-brand-orange/10 transition-transform group-hover:scale-150">
             
             <div className="relative">
-              <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-[#2874f0]/10 text-4xl">
+              <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-brand-orange/10 text-4xl">
                 💼
               </div>
               
@@ -137,8 +137,8 @@ export default function SelectRolePage() {
                 </li>
               </ul>
               
-              <div className="mt-6 rounded-lg bg-[#2874f0]/10 p-3 text-center">
-                <span className="text-sm font-semibold text-[#2874f0]">
+              <div className="mt-6 rounded-lg bg-brand-orange/10 p-3 text-center">
+                <span className="text-sm font-semibold text-brand-orange">
                   Perfect for students with items to share
                 </span>
               </div>

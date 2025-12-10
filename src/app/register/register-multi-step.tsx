@@ -180,11 +180,11 @@ export default function RegisterMultiStep() {
       <div className="flipkart-shadow mb-6 rounded-sm bg-white p-8">
         {/* Progress Indicator */}
         <div className="mb-6 flex items-center justify-center gap-2">
-          <div className={`flex h-8 w-8 items-center justify-center rounded-full ${step === 1 ? 'bg-[#2874f0] text-white' : 'bg-green-500 text-white'} text-sm font-bold`}>
+          <div className={`flex h-8 w-8 items-center justify-center rounded-full ${step === 1 ? 'bg-brand-orange text-white' : 'bg-green-500 text-white'} text-sm font-bold`}>
             {step === 1 ? '1' : '✓'}
           </div>
-          <div className={`h-1 w-16 ${step === 2 ? 'bg-[#2874f0]' : 'bg-gray-300'}`}></div>
-          <div className={`flex h-8 w-8 items-center justify-center rounded-full ${step === 2 ? 'bg-[#2874f0] text-white' : 'bg-gray-300 text-gray-600'} text-sm font-bold`}>
+          <div className={`h-1 w-16 ${step === 2 ? 'bg-brand-orange' : 'bg-gray-300'}`}></div>
+          <div className={`flex h-8 w-8 items-center justify-center rounded-full ${step === 2 ? 'bg-brand-orange text-white' : 'bg-gray-300 text-gray-600'} text-sm font-bold`}>
             2
           </div>
         </div>
@@ -283,7 +283,7 @@ export default function RegisterMultiStep() {
 
             <button
               type="submit"
-              className="w-full rounded-sm bg-[#2874f0] px-4 py-3 text-sm font-bold text-white shadow-md hover:bg-[#1c5bbf]"
+              className="w-full rounded-sm bg-brand-orange px-4 py-3 text-sm font-bold text-white shadow-md hover:bg-brand-orange-dark transition-colors"
             >
               CONTINUE TO VERIFICATION
             </button>
@@ -437,7 +437,7 @@ export default function RegisterMultiStep() {
                   id="acceptTerms"
                   checked={acceptedTerms}
                   onChange={(e) => setAcceptedTerms(e.target.checked)}
-                  className="mt-1 h-4 w-4 cursor-pointer accent-[#2874f0]"
+                  className="mt-1 h-4 w-4 cursor-pointer accent-brand-orange"
                 />
                 <label htmlFor="acceptTerms" className="cursor-pointer text-sm text-gray-700">
                   I have read and agree to the{" "}
@@ -445,7 +445,7 @@ export default function RegisterMultiStep() {
                     href="/terms"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-[#2874f0] underline hover:text-[#1c5bbf]"
+                    className="font-semibold text-brand-orange underline hover:text-brand-orange-dark transition-colors"
                   >
                     Terms and Conditions
                   </a>
@@ -465,7 +465,7 @@ export default function RegisterMultiStep() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="flex-1 rounded-sm border-2 border-gray-300 px-4 py-3 text-sm font-bold text-[#212121] hover:border-[#2874f0]"
+                className="flex-1 rounded-sm border-2 border-gray-300 px-4 py-3 text-sm font-bold text-foreground hover:border-brand-orange transition-colors"
               >
                 BACK
               </button>
@@ -485,7 +485,7 @@ export default function RegisterMultiStep() {
             Already have an account?{" "}
             <a
               href="/login"
-              className="font-semibold text-[#2874f0] hover:underline"
+              className="font-semibold text-brand-orange hover:underline"
             >
               Login
             </a>
@@ -494,7 +494,7 @@ export default function RegisterMultiStep() {
       </div>
       <div className="flipkart-shadow rounded-sm bg-white p-4 text-center text-xs text-gray-600">
         By continuing, you agree to our{" "}
-        <a href="/terms" className="text-[#2874f0] hover:underline">Terms of Use</a>
+        <a href="/terms" className="text-brand-orange hover:underline">Terms of Use</a>
         {" "}and Privacy Policy
       </div>
     </div>

@@ -3,8 +3,18 @@
 :root {
   --background: #f1f3f6;
   --foreground: #212121;
-  --flipkart-blue: #2874f0;
-  --flipkart-blue-dark: #1c5bbf;
+  
+  /* Campus Store Brand Colors - Based on your orange logo */
+  --brand-orange: #ff6b35;
+  --brand-orange-dark: #e55a2b;
+  --brand-orange-light: #ff8c5a;
+  --brand-cream: #f5f1eb;
+  --brand-yellow: #ffe500;
+  --brand-green: #388e3c;
+  
+  /* Legacy colors for gradual migration */
+  --flipkart-blue: #ff6b35;
+  --flipkart-blue-dark: #e55a2b;
   --flipkart-yellow: #ffe500;
   --flipkart-green: #388e3c;
 }
@@ -12,10 +22,21 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-flipkart-blue: var(--flipkart-blue);
-  --color-flipkart-blue-dark: var(--flipkart-blue-dark);
-  --color-flipkart-yellow: var(--flipkart-yellow);
-  --color-flipkart-green: var(--flipkart-green);
+  
+  /* Campus Store Brand Colors */
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-orange-dark: var(--brand-orange-dark);
+  --color-brand-orange-light: var(--brand-orange-light);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-green: var(--brand-green);
+  
+  /* Legacy color mappings for existing components */
+  --color-flipkart-blue: var(--brand-orange);
+  --color-flipkart-blue-dark: var(--brand-orange-dark);
+  --color-flipkart-yellow: var(--brand-yellow);
+  --color-flipkart-green: var(--brand-green);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -81,7 +102,7 @@ body {
 
 /* Focus styles for accessibility */
 *:focus-visible {
-  outline: 2px solid var(--flipkart-blue);
+  outline: 2px solid var(--brand-orange);
   outline-offset: 2px;
 }
 
@@ -96,4 +117,17 @@ html {
     min-height: 44px;
     min-width: 44px;
   }
+}
+
+/* Campus Store form input styles */
+.campus-input {
+  @apply w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange transition-colors;
+}
+
+.campus-button-primary {
+  @apply rounded-sm bg-brand-orange px-4 py-3 text-sm font-bold text-white shadow-md hover:bg-brand-orange-dark transition-colors;
+}
+
+.campus-button-secondary {
+  @apply rounded-sm border-2 border-gray-300 px-4 py-3 text-sm font-bold text-foreground hover:border-brand-orange transition-colors;
 }

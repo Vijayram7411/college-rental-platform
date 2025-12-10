@@ -16,8 +16,8 @@ function NavLink({ href, label, onClick }: { href: string; label: string; onClic
       onClick={onClick}
       className={`px-4 py-2 text-sm font-medium transition-colors ${
         active
-          ? "text-[#2874f0] border-b-2 border-[#2874f0]"
-          : "text-white hover:text-[#ffe500]"
+          ? "text-white border-b-2 border-white bg-white/10 rounded-t-sm"
+          : "text-white/90 hover:text-white hover:bg-white/10 rounded-sm"
       }`}
     >
       {label}
@@ -35,8 +35,8 @@ function MobileNavLink({ href, label, onClick }: { href: string; label: string; 
       onClick={onClick}
       className={`block px-4 py-3 text-sm font-medium transition-colors ${
         active
-          ? "bg-[#1c5bbf] text-white"
-          : "text-white hover:bg-[#1c5bbf]"
+          ? "bg-white/20 text-white"
+          : "text-white hover:bg-white/10"
       }`}
     >
       {label}
@@ -110,13 +110,17 @@ export function MainHeader() {
   }, [router, session, role]);
 
   return (
-    <header className="sticky top-0 z-30 bg-[#2874f0] shadow-md">
+    <header className="sticky top-0 z-30 bg-gradient-to-r from-brand-orange to-brand-orange-dark shadow-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-3">
+            {/* Logo Icon - Shopping bag with graduation cap */}
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm">
+              <span className="text-2xl">🎓</span>
+            </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold italic text-white">College Rentals</span>
-              <span className="text-[10px] text-[#ffe500]">Explore <span className="font-semibold">Plus</span> ⭐</span>
+              <span className="text-xl font-bold text-white">Campus Store</span>
+              <span className="text-[10px] text-[#ffe500]">College <span className="font-semibold">Rentals</span> 🛍️</span>
             </div>
           </Link>
           {/* Desktop Navigation */}
@@ -176,7 +180,7 @@ export function MainHeader() {
               <div className="flex items-center gap-3">
                 <Link
                   href="/login"
-                  className="rounded-sm bg-white px-8 py-1.5 text-sm font-medium text-[#2874f0] hover:bg-gray-100"
+                  className="rounded-sm bg-white px-8 py-1.5 text-sm font-medium text-brand-orange hover:bg-gray-100 transition-colors"
                 >
                   Login
                 </Link>
@@ -199,7 +203,7 @@ export function MainHeader() {
                 )}
                 
                 <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold text-[#2874f0]">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold text-brand-orange">
                     {user?.name?.[0]?.toUpperCase() ?? "U"}
                   </div>
                   <div className="flex flex-col">
@@ -215,7 +219,7 @@ export function MainHeader() {
                 </div>
                 <button
                   onClick={() => signOut({ callbackUrl: "/" })}
-                  className="rounded-sm border border-white px-4 py-1.5 text-sm font-medium text-white hover:bg-[#1c5bbf]"
+                  className="rounded-sm border border-white px-4 py-1.5 text-sm font-medium text-white hover:bg-white/10 transition-colors"
                 >
                   Logout
                 </button>
@@ -227,7 +231,7 @@ export function MainHeader() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#2874f0] border-t border-[#1c5bbf]">
+        <div className="lg:hidden bg-brand-orange-dark border-t border-white/20">
           <nav className="py-2">
             {/* Show for BORROWER or LENDER */}
             {(role === "BORROWER" || role === "LENDER") && (
@@ -260,12 +264,12 @@ export function MainHeader() {
           </nav>
           
           {/* Mobile User Section */}
-          <div className="border-t border-[#1c5bbf] py-3 px-4">
+          <div className="border-t border-white/20 py-3 px-4">
             {status !== "loading" && !session && (
               <Link
                 href="/login"
                 onClick={closeMobileMenu}
-                className="block w-full rounded-sm bg-white px-4 py-2 text-center text-sm font-medium text-[#2874f0] hover:bg-gray-100"
+                className="block w-full rounded-sm bg-white px-4 py-2 text-center text-sm font-medium text-brand-orange hover:bg-gray-100 transition-colors"
               >
                 Login
               </Link>
@@ -273,7 +277,7 @@ export function MainHeader() {
             {session && (
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-base font-bold text-[#2874f0]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-base font-bold text-brand-orange">
                     {user?.name?.[0]?.toUpperCase() ?? "U"}
                   </div>
                   <div className="flex flex-col">
@@ -307,7 +311,7 @@ export function MainHeader() {
                     closeMobileMenu();
                     signOut({ callbackUrl: "/" });
                   }}
-                  className="w-full rounded-sm border border-white px-4 py-2 text-sm font-medium text-white hover:bg-[#1c5bbf]"
+                  className="w-full rounded-sm border border-white px-4 py-2 text-sm font-medium text-white hover:bg-white/10 transition-colors"
                 >
                   Logout
                 </button>
@@ -322,7 +326,7 @@ export function MainHeader() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
           <div className="w-full max-w-md rounded-sm bg-white p-6 shadow-xl">
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-lg font-bold text-[#212121]">
+              <h3 className="text-lg font-bold text-foreground">
                 ⌨️ Keyboard Shortcuts
               </h3>
               <button

@@ -114,7 +114,7 @@ export default function TermsPage() {
           <Link
             href="/TERMS_AND_CONDITIONS.md"
             target="_blank"
-            className="inline-block rounded-sm bg-[#2874f0] px-4 py-2 text-sm font-semibold text-white hover:bg-[#1c5bbf]"
+            className="inline-block rounded-sm bg-brand-orange px-4 py-2 text-sm font-semibold text-white hover:bg-brand-orange-dark transition-colors"
           >
             View Full Terms Document
           </Link>
@@ -135,7 +135,7 @@ export default function TermsPage() {
       <div className="mt-8">
         <Link
           href="/"
-          className="inline-block rounded-sm border-2 border-gray-300 px-6 py-2 text-sm font-semibold text-[#212121] hover:border-[#2874f0]"
+          className="inline-block rounded-sm border-2 border-gray-300 px-6 py-2 text-sm font-semibold text-foreground hover:border-brand-orange transition-colors"
         >
           ← Back to Home
         </Link>

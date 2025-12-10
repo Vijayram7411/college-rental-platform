@@ -52,7 +52,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
       {/* Product Info */}
       <div className="space-y-2 p-4">
-        <h3 className="line-clamp-2 text-sm font-semibold text-[#212121]">
+        <h3 className="line-clamp-2 text-sm font-semibold text-foreground">
           {product.title}
         </h3>
         
@@ -70,7 +70,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Price */}
         <div className="flex items-baseline gap-2">
-          <span className="text-lg font-bold text-[#212121]">
+          <span className="text-lg font-bold text-foreground">
             ₹{product.basePricePerMonth}
           </span>
           <span className="text-xs text-gray-600">/day</span>
@@ -83,7 +83,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <span className="text-xs text-gray-500 line-through">
                 ₹{product.originalPricePerMonth}
               </span>
-              <span className="rounded-sm bg-[#388e3c] px-2 py-0.5 text-xs font-semibold text-white">
+              <span className="rounded-sm bg-brand-green px-2 py-0.5 text-xs font-semibold text-white">
                 {Math.round(
                   ((product.originalPricePerMonth - product.basePricePerMonth) /
                     product.originalPricePerMonth) *

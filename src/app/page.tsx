@@ -45,7 +45,7 @@ export default async function Home() {
               </Link>
               <Link
                 href="/owner/products/add"
-                className="inline-flex items-center gap-2 rounded-sm bg-[#2874f0] px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#1c5bbf]"
+                className="inline-flex items-center gap-2 rounded-sm bg-brand-orange px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-brand-orange-dark transition-colors"
               >
                 List Your Items
               </Link>

@@ -48,14 +48,14 @@ export function ProductActions({ productId, productTitle, showEditButton = true 
         <div className="mt-2 flex gap-2">
           <Link
             href={`/owner/products/${productId}/edit`}
-            className="flex-1 rounded-sm bg-[#2874f0] px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#1c5bbf]"
+            className="flex-1 rounded-sm bg-brand-orange px-4 py-2 text-center text-sm font-semibold text-white hover:bg-brand-orange-dark transition-colors"
           >
             ✏️ Edit
           </Link>
           <button
             onClick={() => setShowConfirm(true)}
             disabled={deleting}
-            className="flex-1 rounded-sm bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#1c5bbf]"
+            className="flex-1 rounded-sm bg-red-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-red-700 transition-colors"
           >
             🗑️ Delete
           </button>
@@ -83,7 +83,7 @@ export function ProductActions({ productId, productTitle, showEditButton = true 
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
           <div className="w-full max-w-md rounded-sm bg-white p-6 shadow-xl">
             <div className="mb-4 text-center text-4xl">⚠️</div>
-            <h3 className="mb-2 text-center text-lg font-bold text-[#212121]">
+            <h3 className="mb-2 text-center text-lg font-bold text-foreground">
               Delete Product?
             </h3>
             <p className="mb-4 text-center text-sm text-gray-600">
@@ -104,7 +104,7 @@ export function ProductActions({ productId, productTitle, showEditButton = true 
                   setError(null);
                 }}
                 disabled={deleting}
-                className="flex-1 rounded-sm border-2 border-gray-300 px-4 py-2 text-sm font-semibold text-[#212121] hover:border-[#2874f0] disabled:opacity-60"
+                className="flex-1 rounded-sm border-2 border-gray-300 px-4 py-2 text-sm font-semibold text-foreground hover:border-brand-orange disabled:opacity-60 transition-colors"
               >
                 Cancel
               </button>
