@@ -101,56 +101,94 @@
   --color-foreground: var(--foreground);
   --color-card-background: var(--card-background);
   --color-border: var(--border);
+  --color-section-background: var(--section-background);
   
-  /* Brand Orange Scale */
-  --color-brand-orange-50: var(--brand-orange-50);
-  --color-brand-orange-100: var(--brand-orange-100);
-  --color-brand-orange-200: var(--brand-orange-200);
-  --color-brand-orange-300: var(--brand-orange-300);
-  --color-brand-orange-400: var(--brand-orange-400);
-  --color-brand-orange-500: var(--brand-orange-500);
-  --color-brand-orange-600: var(--brand-orange-600);
-  --color-brand-orange-700: var(--brand-orange-700);
-  --color-brand-orange-800: var(--brand-orange-800);
-  --color-brand-orange-900: var(--brand-orange-900);
+  /* ICICI Orange Scale */
+  --color-icici-orange-50: var(--icici-orange-50);
+  --color-icici-orange-100: var(--icici-orange-100);
+  --color-icici-orange-200: var(--icici-orange-200);
+  --color-icici-orange-300: var(--icici-orange-300);
+  --color-icici-orange-400: var(--icici-orange-400);
+  --color-icici-orange-500: var(--icici-orange-500);
+  --color-icici-orange-600: var(--icici-orange-600);
+  --color-icici-orange-700: var(--icici-orange-700);
+  --color-icici-orange-800: var(--icici-orange-800);
+  --color-icici-orange-900: var(--icici-orange-900);
   
-  /* Neutral Scale */
-  --color-neutral-50: var(--neutral-50);
-  --color-neutral-100: var(--neutral-100);
-  --color-neutral-200: var(--neutral-200);
-  --color-neutral-300: var(--neutral-300);
-  --color-neutral-400: var(--neutral-400);
-  --color-neutral-500: var(--neutral-500);
-  --color-neutral-600: var(--neutral-600);
-  --color-neutral-700: var(--neutral-700);
-  --color-neutral-800: var(--neutral-800);
-  --color-neutral-900: var(--neutral-900);
+  /* ICICI Navy Scale */
+  --color-icici-navy-50: var(--icici-navy-50);
+  --color-icici-navy-100: var(--icici-navy-100);
+  --color-icici-navy-200: var(--icici-navy-200);
+  --color-icici-navy-300: var(--icici-navy-300);
+  --color-icici-navy-400: var(--icici-navy-400);
+  --color-icici-navy-500: var(--icici-navy-500);
+  --color-icici-navy-600: var(--icici-navy-600);
+  --color-icici-navy-700: var(--icici-navy-700);
+  --color-icici-navy-800: var(--icici-navy-800);
+  --color-icici-navy-900: var(--icici-navy-900);
   
-  /* Semantic Colors */
-  --color-success-50: var(--success-50);
-  --color-success-500: var(--success-500);
-  --color-success-600: var(--success-600);
-  --color-warning-50: var(--warning-50);
-  --color-warning-500: var(--warning-500);
-  --color-warning-600: var(--warning-600);
-  --color-error-50: var(--error-50);
-  --color-error-500: var(--error-500);
-  --color-error-600: var(--error-600);
-  --color-info-50: var(--info-50);
-  --color-info-500: var(--info-500);
-  --color-info-600: var(--info-600);
+  /* ICICI Semantic Colors */
+  --color-icici-success-50: var(--icici-success-50);
+  --color-icici-success-500: var(--icici-success-500);
+  --color-icici-success-600: var(--icici-success-600);
+  --color-icici-warning-50: var(--icici-warning-50);
+  --color-icici-warning-500: var(--icici-warning-500);
+  --color-icici-warning-600: var(--icici-warning-600);
+  --color-icici-error-50: var(--icici-error-50);
+  --color-icici-error-500: var(--icici-error-500);
+  --color-icici-error-600: var(--icici-error-600);
+  --color-icici-info-50: var(--icici-info-50);
+  --color-icici-info-500: var(--icici-info-500);
+  --color-icici-info-600: var(--icici-info-600);
+  
+  /* Legacy Brand Mappings */
+  --color-brand-orange-50: var(--icici-orange-50);
+  --color-brand-orange-100: var(--icici-orange-100);
+  --color-brand-orange-200: var(--icici-orange-200);
+  --color-brand-orange-300: var(--icici-orange-300);
+  --color-brand-orange-400: var(--icici-orange-400);
+  --color-brand-orange-500: var(--icici-orange-500);
+  --color-brand-orange-600: var(--icici-orange-600);
+  --color-brand-orange-700: var(--icici-orange-700);
+  --color-brand-orange-800: var(--icici-orange-800);
+  --color-brand-orange-900: var(--icici-orange-900);
+  
+  --color-neutral-50: var(--icici-navy-50);
+  --color-neutral-100: var(--icici-navy-100);
+  --color-neutral-200: var(--icici-navy-200);
+  --color-neutral-300: var(--icici-navy-300);
+  --color-neutral-400: var(--icici-navy-400);
+  --color-neutral-500: var(--icici-navy-500);
+  --color-neutral-600: var(--icici-navy-600);
+  --color-neutral-700: var(--icici-navy-700);
+  --color-neutral-800: var(--icici-navy-800);
+  --color-neutral-900: var(--icici-navy-900);
+  
+  --color-success-50: var(--icici-success-50);
+  --color-success-500: var(--icici-success-500);
+  --color-success-600: var(--icici-success-600);
+  --color-warning-50: var(--icici-warning-50);
+  --color-warning-500: var(--icici-warning-500);
+  --color-warning-600: var(--icici-warning-600);
+  --color-error-50: var(--icici-error-50);
+  --color-error-500: var(--icici-error-500);
+  --color-error-600: var(--icici-error-600);
+  --color-info-50: var(--icici-info-50);
+  --color-info-500: var(--icici-info-500);
+  --color-info-600: var(--icici-info-600);
   
   /* Brand Shortcuts */
-  --color-brand-orange: var(--brand-orange);
-  --color-brand-orange-dark: var(--brand-orange-dark);
-  --color-brand-orange-light: var(--brand-orange-light);
-  --color-brand-cream: var(--brand-cream);
+  --color-brand-orange: var(--icici-orange-500);
+  --color-brand-orange-dark: var(--icici-orange-600);
+  --color-brand-orange-light: var(--icici-orange-400);
+  --color-brand-navy: var(--icici-navy-900);
+  --color-brand-navy-light: var(--icici-navy-700);
   
   /* Legacy mappings */
-  --color-flipkart-blue: var(--brand-orange);
-  --color-flipkart-blue-dark: var(--brand-orange-dark);
-  --color-flipkart-yellow: var(--warning-500);
-  --color-flipkart-green: var(--success-500);
+  --color-flipkart-blue: var(--icici-orange-500);
+  --color-flipkart-blue-dark: var(--icici-orange-600);
+  --color-flipkart-yellow: var(--icici-warning-500);
+  --color-flipkart-green: var(--icici-success-500);
   
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -217,7 +255,7 @@ body {
 
 /* Focus styles for accessibility */
 *:focus-visible {
-  outline: 2px solid var(--brand-orange);
+  outline: 2px solid var(--icici-orange-500);
   outline-offset: 2px;
 }
 
@@ -238,78 +276,232 @@ html {
 
 /* Form Inputs - ICICI Banking Style */
 .campus-input {
-  @apply w-full rounded-md border-2 border-icici-navy-200 bg-white px-4 py-3 text-sm text-icici-navy-800 placeholder-icici-navy-400 outline-none transition-all duration-200 focus:border-icici-orange-500 focus:ring-2 focus:ring-icici-orange-100 hover:border-icici-navy-300;
+  width: 100%;
+  border-radius: 6px;
+  border: 2px solid var(--icici-navy-200);
+  background-color: white;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--icici-navy-800);
+  outline: none;
+  transition: all 200ms;
+}
+
+.campus-input::placeholder {
+  color: var(--icici-navy-400);
+}
+
+.campus-input:focus {
+  border-color: var(--icici-orange-500);
+  box-shadow: 0 0 0 2px var(--icici-orange-100);
+}
+
+.campus-input:hover {
+  border-color: var(--icici-navy-300);
 }
 
 .campus-input:disabled {
-  @apply bg-icici-navy-50 text-icici-navy-400 cursor-not-allowed border-icici-navy-200;
+  background-color: var(--icici-navy-50);
+  color: var(--icici-navy-400);
+  cursor: not-allowed;
+  border-color: var(--icici-navy-200);
 }
 
 /* Primary Buttons - ICICI Orange Solid */
 .campus-button-primary {
-  @apply relative overflow-hidden rounded-md bg-icici-orange-500 px-8 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-icici-orange-600 hover:shadow-lg focus:ring-2 focus:ring-icici-orange-200 focus:ring-offset-2 active:bg-icici-orange-700;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background-color: var(--icici-orange-500);
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 200ms;
+  border: none;
+  cursor: pointer;
+}
+
+.campus-button-primary:hover {
+  background-color: var(--icici-orange-600);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.campus-button-primary:focus {
+  box-shadow: 0 0 0 2px var(--icici-orange-200), 0 0 0 4px transparent;
+}
+
+.campus-button-primary:active {
+  background-color: var(--icici-orange-700);
 }
 
 /* Secondary Buttons - Navy Outline */
 .campus-button-secondary {
-  @apply rounded-md border-2 border-icici-navy-300 bg-white px-8 py-3 text-sm font-bold text-icici-navy-700 transition-all duration-200 hover:border-icici-orange-500 hover:text-icici-orange-600 hover:bg-icici-orange-50 focus:ring-2 focus:ring-icici-orange-200 focus:ring-offset-2;
+  border-radius: 6px;
+  border: 2px solid var(--icici-navy-300);
+  background-color: white;
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--icici-navy-700);
+  transition: all 200ms;
+  cursor: pointer;
+}
+
+.campus-button-secondary:hover {
+  border-color: var(--icici-orange-500);
+  color: var(--icici-orange-600);
+  background-color: var(--icici-orange-50);
+}
+
+.campus-button-secondary:focus {
+  box-shadow: 0 0 0 2px var(--icici-orange-200), 0 0 0 4px transparent;
 }
 
 /* Tertiary Buttons - Text Only */
 .campus-button-tertiary {
-  @apply rounded-md px-6 py-2 text-sm font-semibold text-icici-orange-600 transition-all duration-200 hover:bg-icici-orange-50 hover:text-icici-orange-700 focus:ring-2 focus:ring-icici-orange-200 focus:ring-offset-2;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--icici-orange-600);
+  transition: all 200ms;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.campus-button-tertiary:hover {
+  background-color: var(--icici-orange-50);
+  color: var(--icici-orange-700);
+}
+
+.campus-button-tertiary:focus {
+  box-shadow: 0 0 0 2px var(--icici-orange-200), 0 0 0 4px transparent;
 }
 
 /* Navy Buttons - Professional Dark */
 .campus-button-navy {
-  @apply rounded-md bg-icici-navy-900 px-8 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-icici-navy-800 hover:shadow-lg focus:ring-2 focus:ring-icici-navy-300 focus:ring-offset-2;
+  border-radius: 6px;
+  background-color: var(--icici-navy-900);
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 200ms;
+  border: none;
+  cursor: pointer;
+}
+
+.campus-button-navy:hover {
+  background-color: var(--icici-navy-800);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.campus-button-navy:focus {
+  box-shadow: 0 0 0 2px var(--icici-navy-300), 0 0 0 4px transparent;
 }
 
 /* Card Styles - ICICI Clean Design */
 .campus-card {
-  @apply rounded-lg bg-white border border-icici-navy-200 shadow-sm transition-all duration-200 hover:shadow-md hover:border-icici-navy-300;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid var(--icici-navy-200);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 200ms;
+}
+
+.campus-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-color: var(--icici-navy-300);
 }
 
 .campus-card-elevated {
-  @apply rounded-lg bg-white shadow-md border border-icici-navy-200 transition-all duration-300 hover:shadow-lg;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--icici-navy-200);
+  transition: all 300ms;
+}
+
+.campus-card-elevated:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .campus-card-featured {
-  @apply rounded-lg bg-white shadow-lg border-2 border-icici-orange-200 transition-all duration-300 hover:shadow-xl hover:border-icici-orange-300;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--icici-orange-200);
+  transition: all 300ms;
 }
 
-/* Section Backgrounds - ICICI Style */
-.campus-section-light {
-  @apply bg-icici-navy-50 border-y border-icici-navy-100;
-}
-
-.campus-section-orange {
-  @apply bg-gradient-to-r from-icici-orange-50 to-icici-orange-100 border-y border-icici-orange-200;
-}
-
-.campus-section-navy {
-  @apply bg-icici-navy-900 text-white;
+.campus-card-featured:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border-color: var(--icici-orange-300);
 }
 
 /* Status Badges - Banking Style */
 .campus-badge-success {
-  @apply inline-flex items-center rounded-md bg-icici-success-50 px-3 py-1 text-xs font-bold text-icici-success-600 border border-icici-success-200;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  background-color: var(--icici-success-50);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--icici-success-600);
+  border: 1px solid var(--icici-success-200);
 }
 
 .campus-badge-warning {
-  @apply inline-flex items-center rounded-md bg-icici-warning-50 px-3 py-1 text-xs font-bold text-icici-warning-600 border border-icici-warning-200;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  background-color: var(--icici-warning-50);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--icici-warning-600);
+  border: 1px solid var(--icici-warning-200);
 }
 
 .campus-badge-error {
-  @apply inline-flex items-center rounded-md bg-icici-error-50 px-3 py-1 text-xs font-bold text-icici-error-600 border border-icici-error-200;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  background-color: var(--icici-error-50);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--icici-error-600);
+  border: 1px solid var(--icici-error-200);
 }
 
 .campus-badge-info {
-  @apply inline-flex items-center rounded-md bg-icici-info-50 px-3 py-1 text-xs font-bold text-icici-info-600 border border-icici-info-200;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  background-color: var(--icici-info-50);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--icici-info-600);
+  border: 1px solid var(--icici-info-200);
 }
 
 .campus-badge-orange {
-  @apply inline-flex items-center rounded-md bg-icici-orange-100 px-3 py-1 text-xs font-bold text-icici-orange-700 border border-icici-orange-300;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  background-color: var(--icici-orange-100);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--icici-orange-700);
+  border: 1px solid var(--icici-orange-300);
 }
 
 /* ICICI-Style Shadows */
