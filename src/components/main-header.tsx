@@ -159,20 +159,22 @@ export function MainHeader() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-white p-2"
+            className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
             aria-label="Toggle menu"
+            suppressHydrationWarning
           >
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
             </svg>
           </button>
 
           {/* Desktop User Section */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4" suppressHydrationWarning>
             {status === "loading" && (
               <span className="text-sm text-white">Loading...</span>
             )}
@@ -203,10 +205,10 @@ export function MainHeader() {
                 )}
                 
                 <div className="flex items-center gap-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-brand-orange-600 shadow-md border-2 border-white/50">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold text-brand-orange-600 shadow-md border-2 border-white/50" suppressHydrationWarning>
                     {user?.name?.[0]?.toUpperCase() ?? "U"}
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col" suppressHydrationWarning>
                     <span className="text-sm font-medium text-white">
                       {user?.name ?? user?.email ?? "User"}
                     </span>
@@ -264,7 +266,7 @@ export function MainHeader() {
           </nav>
           
           {/* Mobile User Section */}
-          <div className="border-t border-white/20 py-3 px-4">
+          <div className="border-t border-white/20 py-3 px-4" suppressHydrationWarning>
             {status !== "loading" && !session && (
               <Link
                 href="/login"
@@ -277,10 +279,10 @@ export function MainHeader() {
             {session && (
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-base font-bold text-brand-orange">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-base font-bold text-brand-orange" suppressHydrationWarning>
                     {user?.name?.[0]?.toUpperCase() ?? "U"}
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col" suppressHydrationWarning>
                     <span className="text-sm font-medium text-white">
                       {user?.name ?? user?.email ?? "User"}
                     </span>
