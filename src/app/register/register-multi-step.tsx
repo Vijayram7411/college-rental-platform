@@ -189,7 +189,7 @@ export default function RegisterMultiStep() {
           </div>
         </div>
 
-        <h1 className="mb-2 text-2xl font-bold text-[#212121]">
+        <h1 className="mb-2 text-2xl font-bold text-neutral-800">
           {step === 1 ? 'Sign Up' : 'Verification Details'}
         </h1>
         <p className="mb-6 text-sm text-gray-600">
@@ -200,8 +200,8 @@ export default function RegisterMultiStep() {
         {step === 1 && (
           <form onSubmit={handleStep1Submit} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="name" className="block text-sm font-semibold text-[#212121]">
-                Full Name <span className="text-red-500">*</span>
+              <label htmlFor="name" className="block text-sm font-semibold text-neutral-700">
+                Full Name <span className="text-error-500">*</span>
               </label>
               <input
                 id="name"
@@ -210,13 +210,13 @@ export default function RegisterMultiStep() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 placeholder="Enter your full name"
-                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+                className="campus-input"
               />
             </div>
             
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-semibold text-[#212121]">
-                Email Address <span className="text-red-500">*</span>
+              <label htmlFor="email" className="block text-sm font-semibold text-neutral-700">
+                Email Address <span className="text-error-500">*</span>
               </label>
               <input
                 id="email"
@@ -225,13 +225,13 @@ export default function RegisterMultiStep() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="your.email@example.com"
-                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+                className="campus-input"
               />
             </div>
             
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-semibold text-[#212121]">
-                Password <span className="text-red-500">*</span>
+              <label htmlFor="password" className="block text-sm font-semibold text-neutral-700">
+                Password <span className="text-error-500">*</span>
               </label>
               <input
                 id="password"
@@ -241,13 +241,13 @@ export default function RegisterMultiStep() {
                 required
                 minLength={6}
                 placeholder="Minimum 6 characters"
-                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+                className="campus-input"
               />
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="phone" className="block text-sm font-semibold text-[#212121]">
-                Phone Number <span className="text-red-500">*</span>
+              <label htmlFor="phone" className="block text-sm font-semibold text-neutral-700">
+                Phone Number <span className="text-error-500">*</span>
               </label>
               <input
                 id="phone"
@@ -256,12 +256,12 @@ export default function RegisterMultiStep() {
                 onChange={(e) => setPhone(e.target.value)}
                 required
                 placeholder="Enter your phone number"
-                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+                className="campus-input"
               />
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="collegeEmail" className="block text-sm font-semibold text-[#212121]">
+              <label htmlFor="collegeEmail" className="block text-sm font-semibold text-neutral-700">
                 College Email (Optional)
               </label>
               <input
@@ -270,7 +270,7 @@ export default function RegisterMultiStep() {
                 value={collegeEmail}
                 onChange={(e) => setCollegeEmail(e.target.value)}
                 placeholder="your.name@college.edu"
-                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+                className="campus-input"
               />
               <p className="text-xs text-gray-500">For additional verification</p>
             </div>
@@ -283,7 +283,7 @@ export default function RegisterMultiStep() {
 
             <button
               type="submit"
-              className="w-full rounded-sm bg-brand-orange px-4 py-3 text-sm font-bold text-white shadow-md hover:bg-brand-orange-dark transition-colors"
+              className="campus-button-primary w-full"
             >
               CONTINUE TO VERIFICATION
             </button>
@@ -294,8 +294,8 @@ export default function RegisterMultiStep() {
         {step === 2 && (
           <form onSubmit={handleStep2Submit} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="college" className="block text-sm font-semibold text-[#212121]">
-                College Name <span className="text-red-500">*</span>
+              <label htmlFor="college" className="block text-sm font-semibold text-neutral-700">
+                College Name <span className="text-error-500">*</span>
               </label>
               <input
                 id="college"
@@ -304,14 +304,14 @@ export default function RegisterMultiStep() {
                 onChange={(e) => setCollegeId(e.target.value)}
                 required
                 placeholder="Enter your college name"
-                className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+                className="campus-input"
               />
               <p className="text-xs text-gray-500">Enter the full name of your college</p>
             </div>
 
             <div className="space-y-2">
-              <label className="block text-sm font-semibold text-[#212121]">
-                Student ID Card <span className="text-red-500">*</span>
+              <label className="block text-sm font-semibold text-neutral-700">
+                Student ID Card <span className="text-error-500">*</span>
               </label>
               <div className="rounded-sm bg-blue-50 border border-blue-200 p-3 mb-2">
                 <p className="text-xs text-blue-800 font-semibold mb-1">📸 ID Photo Requirements:</p>
@@ -361,8 +361,8 @@ export default function RegisterMultiStep() {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-sm font-semibold text-[#212121]">
-                Aadhaar Number (Partial) <span className="text-red-500">*</span>
+              <label className="block text-sm font-semibold text-neutral-700">
+                Aadhaar Number (Partial) <span className="text-error-500">*</span>
               </label>
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -381,7 +381,7 @@ export default function RegisterMultiStep() {
                     required
                     maxLength={4}
                     placeholder="1234"
-                    className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+                    className="campus-input"
                   />
                 </div>
                 <div>
@@ -400,7 +400,7 @@ export default function RegisterMultiStep() {
                     required
                     maxLength={4}
                     placeholder="5678"
-                    className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+                    className="campus-input"
                   />
                 </div>
               </div>
@@ -410,8 +410,8 @@ export default function RegisterMultiStep() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="photo" className="block text-sm font-semibold text-[#212121]">
-                Your Photo <span className="text-red-500">*</span>
+              <label htmlFor="photo" className="block text-sm font-semibold text-neutral-700">
+                Your Photo <span className="text-error-500">*</span>
               </label>
               <p className="text-xs text-gray-600 mb-2">
                 Upload a clear passport-size photo

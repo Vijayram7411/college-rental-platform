@@ -47,13 +47,13 @@ function LoginForm() {
   return (
     <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center py-8">
       <div className="flipkart-shadow mb-6 rounded-sm bg-white p-8">
-        <h1 className="mb-2 text-2xl font-bold text-[#212121]">Login</h1>
+        <h1 className="mb-2 text-2xl font-bold text-neutral-800">Login</h1>
         <p className="mb-6 text-sm text-gray-600">
           Get access to your orders and rentals
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-semibold text-[#212121]">
+            <label htmlFor="email" className="block text-sm font-semibold text-neutral-700">
               Email Address
             </label>
             <input
@@ -63,11 +63,11 @@ function LoginForm() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="Enter your email"
-              className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+              className="campus-input"
             />
           </div>
           <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm font-semibold text-[#212121]">
+            <label htmlFor="password" className="block text-sm font-semibold text-neutral-700">
               Password
             </label>
             <input
@@ -77,7 +77,7 @@ function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder="Enter your password"
-              className="w-full rounded-sm border border-gray-300 px-4 py-3 text-sm outline-none focus:border-[#2874f0] focus:ring-1 focus:ring-[#2874f0]"
+              className="campus-input"
             />
           </div>
           {error && (
@@ -131,7 +131,7 @@ function LoginForm() {
             New to College Rentals?{" "}
             <a
               href="/register"
-              className="font-semibold text-[#2874f0] hover:underline"
+              className="font-semibold text-brand-orange-600 hover:underline"
             >
               Create an account
             </a>
