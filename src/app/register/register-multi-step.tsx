@@ -211,6 +211,7 @@ export default function RegisterMultiStep() {
                 required
                 placeholder="Enter your full name"
                 className="campus-input"
+                suppressHydrationWarning
               />
             </div>
             
@@ -226,6 +227,7 @@ export default function RegisterMultiStep() {
                 required
                 placeholder="your.email@example.com"
                 className="campus-input"
+                suppressHydrationWarning
               />
             </div>
             
@@ -242,6 +244,7 @@ export default function RegisterMultiStep() {
                 minLength={6}
                 placeholder="Minimum 6 characters"
                 className="campus-input"
+                suppressHydrationWarning
               />
             </div>
 
@@ -257,6 +260,7 @@ export default function RegisterMultiStep() {
                 required
                 placeholder="Enter your phone number"
                 className="campus-input"
+                suppressHydrationWarning
               />
             </div>
 
@@ -271,6 +275,7 @@ export default function RegisterMultiStep() {
                 onChange={(e) => setCollegeEmail(e.target.value)}
                 placeholder="your.name@college.edu"
                 className="campus-input"
+                suppressHydrationWarning
               />
               <p className="text-xs text-gray-500">For additional verification</p>
             </div>
@@ -284,6 +289,7 @@ export default function RegisterMultiStep() {
             <button
               type="submit"
               className="campus-button-primary w-full"
+              suppressHydrationWarning
             >
               CONTINUE TO VERIFICATION
             </button>
@@ -305,6 +311,7 @@ export default function RegisterMultiStep() {
                 required
                 placeholder="Enter your college name"
                 className="campus-input"
+                suppressHydrationWarning
               />
               <p className="text-xs text-gray-500">Enter the full name of your college</p>
             </div>
@@ -382,6 +389,7 @@ export default function RegisterMultiStep() {
                     maxLength={4}
                     placeholder="1234"
                     className="campus-input"
+                    suppressHydrationWarning
                   />
                 </div>
                 <div>
@@ -401,6 +409,7 @@ export default function RegisterMultiStep() {
                     maxLength={4}
                     placeholder="5678"
                     className="campus-input"
+                    suppressHydrationWarning
                   />
                 </div>
               </div>

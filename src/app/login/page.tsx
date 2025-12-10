@@ -64,6 +64,7 @@ function LoginForm() {
               required
               placeholder="Enter your email"
               className="campus-input"
+              suppressHydrationWarning
             />
           </div>
           <div className="space-y-2">
@@ -78,6 +79,7 @@ function LoginForm() {
               required
               placeholder="Enter your password"
               className="campus-input"
+              suppressHydrationWarning
             />
           </div>
           {error && (
